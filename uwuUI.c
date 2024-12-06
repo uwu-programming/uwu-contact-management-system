@@ -17,7 +17,23 @@ int createGTKAPP(int argc, char *argv[]){
 
 // function to create the main window and widgets
 static void startApp(GtkApplication *uwuApp, gpointer uwuData){
-    // create GtkBuilder pointer to
-    GtkBuilder *uwuBuilder = gtk_builder_new();
-    gtk_builder_add_from_file(uwuBuilder, "uwuMainUI.ui", NULL);
+    // define variables
+    GtkBuilder *uwuBuilder = NULL; // GtkBuilder pointer
+    GObject *uwuWindow = NULL; // pointer for window widget
+    GObject *uwuTextField = NULL; // pointer for text field widget
+
+    // create a GtkBuilder object and store it to uwuBuilder
+    uwuBuilder = gtk_builder_new();
+    gtk_builder_add_from_file(uwuBuilder, "uwuMainUI.ui", NULL); // add the main ui GtkBuilder.ui file into the object
+
+    // connect the created widget to GtkBuilder object
+    // create the window widget
+    uwuWindow = gtk_builder_get_object(uwuBuilder, "uwuWindow");
+    gtk_window_set_application(GTK_WINDOW(uwuWindow), uwuApp);
+
+    // make window visible
+    gtk_widget_set_visible(GTK_WIDGET(uwuWindow), TRUE);
+
+    // free the builder object
+    g_object_unref(uwuBuilder);
 }

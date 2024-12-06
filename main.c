@@ -3,7 +3,7 @@
 
 // main
 int main(int argc, char *argv[]){
-    createGTKAPP(argc, argv);
+    int status = createGTKAPP(argc, argv);
 
-    return 0;
+    return status; // return the status after running createGTKAPP
 }
