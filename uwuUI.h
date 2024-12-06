@@ -12,4 +12,7 @@ int createGTKAPP(int argc, char *argv[]);
 // function to start running the app after GtkApplication is created
 static void startApp(GtkApplication *uwuApp, gpointer uwuData);
 
+// uwuDebug
+static void uwuDebug();
+
 #endif // else, do nothing
