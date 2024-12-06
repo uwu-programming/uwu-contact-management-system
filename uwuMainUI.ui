@@ -2,5 +2,13 @@
 <interface>
     <!-- declare the main window -->
     <object id = "uwuWindow" class = "GtkWindow">
+        <child>
+            <object id = "uwuBox" class = "GtkBox">
+                <child>
+                    <object id = "uwuEntry" class = "GtkEntry">
+                    </object>
+                </child>
+            </object>
+        </child>
     </object>
 </interface>

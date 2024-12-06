@@ -20,6 +20,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // define variables
     GtkBuilder *uwuBuilder = NULL; // GtkBuilder pointer
     GObject *uwuWindow = NULL; // pointer for window widget
+    GObject *uwuWindowBox = NULL; // pointer for window's child, the box layout
     GObject *uwuTextField = NULL; // pointer for text field widget
 
     // create a GtkBuilder object and store it to uwuBuilder
@@ -31,9 +32,18 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     uwuWindow = gtk_builder_get_object(uwuBuilder, "uwuWindow");
     gtk_window_set_application(GTK_WINDOW(uwuWindow), uwuApp);
 
+    // create an entry field
+    uwuTextField = gtk_builder_get_object(uwuBuilder, "uwuEntry");
+    g_signal_connect(uwuTextField, "changed", G_CALLBACK(uwuDebug), NULL);
+
     // make window visible
     gtk_widget_set_visible(GTK_WIDGET(uwuWindow), TRUE);
 
     // free the builder object
     g_object_unref(uwuBuilder);
+}
+
+// test function for debug use
+static void uwuDebug(){
+    printf("uwu\n");
 }
