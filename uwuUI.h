@@ -3,8 +3,13 @@
 
 // include gtk
 #include <gtk/gtk.h>
+// header for builder UI
+#include <glib/gstdio.h>
 
-// fucntion
-static int createGTKAPP (int argc, char *argv[]);
+// fucntion to create GtkApplication object
+int createGTKAPP(int argc, char *argv[]);
+
+// function to start running the app after GtkApplication is created
+static void startApp(GtkApplication *uwuApp, gpointer uwuData);
 
 #endif // else, do nothing
