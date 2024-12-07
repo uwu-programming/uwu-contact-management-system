@@ -3,9 +3,15 @@
     <!-- declare the main window -->
     <object id = "uwuWindow" class = "GtkWindow">
         <child>
-            <object id = "uwuBox" class = "GtkBox">
+            <object id = "uwuWindowBox" class = "GtkBox">
                 <child>
-                    <object id = "uwuEntry" class = "GtkEntry">
+                    <object id = "uwuLabelName" class = "GtkLabel">
+                    </object>
+                </child>
+                <child>
+                    <object id = "uwuEntryName" class = "GtkEntry">
+                        <attributes>
+                        </attributes>
                     </object>
                 </child>
             </object>
