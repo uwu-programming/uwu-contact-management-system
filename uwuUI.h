@@ -6,6 +6,9 @@
 // header for builder UI
 #include <glib/gstdio.h>
 
+// global variables
+static GtkCssProvider *uwuCssSource; // pointer to css file
+
 // fucntion to create GtkApplication object
 int createGTKAPP(int argc, char *argv[]);
 
