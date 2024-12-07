@@ -47,7 +47,7 @@
                                 <child>
                                     <object id = "uwuFieldEntryPassword" class = "GtkBox">
                                         <child>
-                                            <object id = "uwuEntryPassword" class = "GtkEntry"></object>
+                                            <object id = "uwuEntryPassword" class = "GtkPasswordEntry"></object>
                                         </child>
                                     </object>
                                 </child>

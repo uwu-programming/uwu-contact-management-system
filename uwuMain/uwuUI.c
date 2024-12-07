@@ -106,7 +106,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     uwuEntryPassword = gtk_builder_get_object(uwuBuilder, "uwuEntryPassword");
     gtk_label_set_label(GTK_LABEL(uwuLabelPassword), "Password:"); // set label of uwuLabelPassword to "Password: "
     gtk_widget_add_css_class(GTK_WIDGET(uwuLabelPassword), "uwuMainPageLabel"); // add uwuMainPageLabel class to uwuLabelPassword (for css)
-    gtk_widget_add_css_class(GTK_WIDGET(uwuEntryPassword), "uwuEntryPassword"); // add uwuMainPageEntry class to uwuEntryPassword (for css)
+    gtk_widget_add_css_class(GTK_WIDGET(uwuEntryPassword), "uwuMainPageEntry"); // add uwuMainPageEntry class to uwuEntryPassword (for css)
     gtk_widget_set_halign(GTK_WIDGET(uwuLabelPassword), GTK_ALIGN_END);
     gtk_widget_set_halign(GTK_WIDGET(uwuEntryPassword), GTK_ALIGN_END);
     gtk_widget_set_size_request(GTK_WIDGET(uwuEntryPassword), 350, 60);
