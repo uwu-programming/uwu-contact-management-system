@@ -44,7 +44,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_css_provider_load_from_path(uwuCssSource, "uwuMainUI.css");
     gtk_style_context_add_provider_for_display(gdk_display_get_default(), GTK_STYLE_PROVIDER(uwuCssSource), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
-    // get the box widget
+    // get the window box widget
     uwuWindowBox = gtk_builder_get_object(uwuBuilder, "uwuWindowBox");
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuWindowBox), GTK_ORIENTATION_VERTICAL);
     gtk_box_set_homogeneous(GTK_BOX(uwuWindowBox), TRUE);
