@@ -21,7 +21,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     GtkBuilder *uwuBuilder = NULL; // GtkBuilder pointer
     GObject *uwuWindow = NULL; // pointer for window widget
     GObject *uwuWindowBox = NULL; // pointer for window's child, the box layout
-    GObject *uwuTextField = NULL; // pointer for text field widget
+    GObject *uwuLabelName = NULL, *uwuEntryName = NULL; // pointer for name's label and text field widget
 
     // create a GtkBuilder object and store it to uwuBuilder
     uwuBuilder = gtk_builder_new();
@@ -32,9 +32,16 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     uwuWindow = gtk_builder_get_object(uwuBuilder, "uwuWindow");
     gtk_window_set_application(GTK_WINDOW(uwuWindow), uwuApp);
 
-    // create an entry field
-    uwuTextField = gtk_builder_get_object(uwuBuilder, "uwuEntry");
-    g_signal_connect(uwuTextField, "changed", G_CALLBACK(uwuDebug), NULL);
+    // get the box widget
+    uwuWindowBox = gtk_builder_get_object(uwuBuilder, "uwuWindowBox");
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuWindowBox), GTK_ORIENTATION_VERTICAL);
+
+    // create an entry field with label for insert username
+    uwuLabelName = gtk_builder_get_object(uwuBuilder, "uwuLabelName");
+    gtk_label_set_label(GTK_LABEL(uwuLabelName), "it is uwu time");
+    printf("%s\n", gtk_label_get_text(GTK_LABEL(uwuLabelName)));
+    uwuEntryName = gtk_builder_get_object(uwuBuilder, "uwuEntryName");
+    g_signal_connect(uwuEntryName, "changed", G_CALLBACK(uwuDebug), NULL);
 
     // make window visible
     gtk_widget_set_visible(GTK_WIDGET(uwuWindow), TRUE);
