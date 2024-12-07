@@ -47,6 +47,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // get the box widget
     uwuWindowBox = gtk_builder_get_object(uwuBuilder, "uwuWindowBox");
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuWindowBox), GTK_ORIENTATION_VERTICAL);
+    gtk_box_set_homogeneous(GTK_BOX(uwuWindowBox), TRUE);
 
     // link the three fields (three box widget: top, mid, bottom) from uwuMainUI
     uwuFieldTop = gtk_builder_get_object(uwuBuilder, "uwuFieldTop");
@@ -66,13 +67,16 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for horizontal
     gtk_widget_set_valign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for vertical
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldMiddle), "uwutest2");
-    gtk_widget_set_size_request(GTK_WIDGET(uwuFieldMiddle), 900, 500);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuFieldMiddle), 900, 150);
+    gtk_box_set_homogeneous(GTK_BOX(uwuFieldMiddle), TRUE);
 
     // modify name and password field (horizontal orientation)
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldName), GTK_ORIENTATION_HORIZONTAL);
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldPassword), GTK_ORIENTATION_HORIZONTAL);
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldName), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldName), GTK_ALIGN_CENTER);
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldPassword), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldPassword), GTK_ALIGN_CENTER);
 
     // modify label and entry field of name and password
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldEntryName), "uwutest");
