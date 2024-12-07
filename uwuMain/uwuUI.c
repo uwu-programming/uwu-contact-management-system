@@ -22,6 +22,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     GObject *uwuWindow = NULL; // pointer for window widget
     GObject *uwuWindowBox = NULL; // pointer for window's child, the box layout
     GObject *uwuFieldTop = NULL, *uwuFieldMiddle = NULL, *uwuFieldBottom = NULL; // pointer for the three field
+    GObject *uwuFieldName = NULL, *uwuFieldPassword = NULL; // box widget for positioning name and password field
     GObject *uwuLabelName = NULL, *uwuEntryName = NULL; // pointer for name's label and text field widget
     GObject *uwuLabelPassword = NULL, *uwuEntryPassword = NULL; // pointer for password's label and text field widget
 
@@ -48,20 +49,31 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     uwuFieldMiddle = gtk_builder_get_object(uwuBuilder, "uwuFieldMiddle");
     uwuFieldBottom = gtk_builder_get_object(uwuBuilder, "uwuFieldBottom");
 
+    // link name and password field
+    uwuFieldName = gtk_builder_get_object(uwuBuilder, "uwuFieldName");
+    uwuFieldPassword = gtk_builder_get_object(uwuBuilder, "uwuFieldPassword");
+
     // modify middle field
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldMiddle), GTK_ORIENTATION_VERTICAL);
+    gtk_widget_set_halign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for horizontal
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for vertical
+
+    // modify name and password field (horizontal orientation)
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldName), GTK_ORIENTATION_HORIZONTAL);
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldPassword), GTK_ORIENTATION_HORIZONTAL);
 
     // link the label and entry field for username from uwuMainUI to here
     uwuLabelName = gtk_builder_get_object(uwuBuilder, "uwuLabelName");
     uwuEntryName = gtk_builder_get_object(uwuBuilder, "uwuEntryName");
-    gtk_label_set_label(GTK_LABEL(uwuLabelName), "Username:");
-    gtk_widget_set_name(GTK_WIDGET(uwuLabelName), "uwuLabelName");
-    printf("%s\n", gtk_widget_get_name(GTK_WIDGET(uwuLabelName)));
+    gtk_label_set_label(GTK_LABEL(uwuLabelName), "Username:"); // set label of uwuLabelName to "Username: "
+    gtk_widget_add_css_class(GTK_WIDGET(uwuLabelName), "uwuMainPageLabel"); // add uwuMainPageLabel class to uwuLabelName
     g_signal_connect(uwuEntryName, "changed", G_CALLBACK(uwuDebug), NULL);
 
     // link the label and entry field for password from uwuMainUI to here
     uwuLabelPassword = gtk_builder_get_object(uwuBuilder, "uwuLabelPassword");
     uwuEntryPassword = gtk_builder_get_object(uwuBuilder, "uwuEntryPassword");
+    gtk_label_set_label(GTK_LABEL(uwuLabelPassword), "Password:"); // set label of uwuLabelPassword to "Password: "
+    gtk_widget_add_css_class(GTK_WIDGET(uwuLabelPassword), "uwuMainPageLabel"); // add uwuMainPageLabel class to uwuLabelPassword
 
     // make window visible
     gtk_widget_set_visible(GTK_WIDGET(uwuWindow), TRUE);
