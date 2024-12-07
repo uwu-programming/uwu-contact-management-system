@@ -9,11 +9,11 @@ struct UwUUserNode* createNewNode(string username, string password){
     size_t i = 0, j = 0;
     for (; username[i] != '\0'; i++)
         uwuNewUser -> username[i] = username[i];
-    uwuNewUser -> username[i] = '\0';
+    uwuNewUser -> username[i] = '\0'; // add terminate character
 
     for (; password[j] != '\0'; j++)
         uwuNewUser -> password[j] = password[j];
-    uwuNewUser -> password[j] = '\0';
+    uwuNewUser -> password[j] = '\0'; // add terminate character
 
     // let the new node's user point to the newly created user struct
     uwuNewNode -> user = uwuNewUser;
@@ -35,21 +35,9 @@ void readUsersFromFile(string filePath){
     uwuUserLoginFile = fopen(USERS_CSV, READ); // open the file
 
     if (uwuUserLoginFile != NULL){
+        // loop until output fscanf is not 2 (didn't read 2 string from files)
         while(fscanf(uwuUserLoginFile, "%s %s", username, password) == 2){
-            addNode(username, password);
+            addNode(username, password); // create a new node of this user data
         }
     }
-}
-
-int main(){
-    addNode("aaaadwddwd", "bbbbb");
-    addNode( "aaawdda", "bbbbb");
-    addNode("aadwdwdaa", "bbbbb");
-    readUsersFromFile(USERS_CSV);
-    struct UwUUserNode *temp = uwuUserHeadNode;
-    while(temp -> next != NULL){
-        printf("%s %s\n", temp->user->username, temp -> user -> password);
-        temp = temp -> next;
-    }
-    return 0;
 }

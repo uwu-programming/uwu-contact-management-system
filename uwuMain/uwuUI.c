@@ -1,4 +1,5 @@
 #include "uwuUI.h"
+#include "uwuUserLogin.h"
 
 // main function: creating the root of application (GtkApplication object)
 int createGTKAPP(int argc, char *argv[]){
@@ -22,10 +23,13 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     GObject *uwuWindow = NULL; // pointer for window widget
     GObject *uwuWindowBox = NULL; // pointer for window's child, the box layout
     GObject *uwuFieldTop = NULL, *uwuFieldMiddle = NULL, *uwuFieldBottom = NULL; // pointer for the three field
+    GObject *uwuTitleTop = NULL; // pointer for the title on top field
     GObject *uwuFieldName = NULL, *uwuFieldPassword = NULL; // box widget for positioning name and password field
     GObject *uwuFieldLabelName = NULL, *uwuFieldEntryName = NULL, *uwuFieldLabelPassword = NULL, *uwuFieldEntryPassword = NULL;
     GObject *uwuLabelName = NULL, *uwuEntryName = NULL; // pointer for name's label and text field widget
     GObject *uwuLabelPassword = NULL, *uwuEntryPassword = NULL; // pointer for password's label and text field widget
+    GObject *uwuFieldButtonLogin = NULL, *uwuFieldButtonSignup = NULL; // pointer to the login and signup button field
+    GObject *uwuButtonLogin = NULL, *uwuButtonSignup = NULL; // pointer for login and signup button
 
     // create a GtkBuilder object and store it to uwuBuilder
     uwuBuilder = gtk_builder_new();
@@ -47,7 +51,6 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // get the window box widget
     uwuWindowBox = gtk_builder_get_object(uwuBuilder, "uwuWindowBox");
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuWindowBox), GTK_ORIENTATION_VERTICAL);
-    gtk_box_set_homogeneous(GTK_BOX(uwuWindowBox), TRUE);
 
     // link the three fields (three box widget: top, mid, bottom) from uwuMainUI
     uwuFieldTop = gtk_builder_get_object(uwuBuilder, "uwuFieldTop");
@@ -62,12 +65,26 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     uwuFieldLabelPassword = gtk_builder_get_object(uwuBuilder, "uwuFieldLabelPassword");
     uwuFieldEntryPassword = gtk_builder_get_object(uwuBuilder, "uwuFieldEntryPassword");
 
+    // modify top field
+    gtk_widget_add_css_class(GTK_WIDGET(uwuFieldTop), "top");
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldTop), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(uwuFieldTop), GTK_ALIGN_CENTER);
+    gtk_box_set_homogeneous(GTK_BOX(uwuFieldTop), TRUE);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuFieldTop), 900, 250);
+
+    // top title
+    uwuTitleTop = gtk_builder_get_object(uwuBuilder, "uwuTitleTop");
+    gtk_widget_add_css_class(GTK_WIDGET(uwuTitleTop), "uwuTopTitle");
+    gtk_label_set_label(GTK_LABEL(uwuTitleTop), "UwU Contact Management System");
+    gtk_widget_set_valign(GTK_WIDGET(uwuTitleTop), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(uwuTitleTop), GTK_ALIGN_CENTER);
+
     // modify middle field
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldMiddle), GTK_ORIENTATION_VERTICAL);
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for horizontal
     gtk_widget_set_valign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for vertical
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldMiddle), "uwutest2");
-    gtk_widget_set_size_request(GTK_WIDGET(uwuFieldMiddle), 900, 150);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuFieldMiddle), 900, 200);
     gtk_box_set_homogeneous(GTK_BOX(uwuFieldMiddle), TRUE);
 
     // modify name and password field (horizontal orientation)
@@ -98,7 +115,8 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_widget_add_css_class(GTK_WIDGET(uwuEntryName), "uwuMainPageEntry"); // add uwuMainPageEntry class to uwuEntryName (for css)
     gtk_widget_set_halign(GTK_WIDGET(uwuLabelName), GTK_ALIGN_END);
     gtk_widget_set_halign(GTK_WIDGET(uwuEntryName), GTK_ALIGN_END);
-    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryName), 350, 60);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuLabelName), 0, 60);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryName), 380, 60);
     g_signal_connect(uwuEntryName, "changed", G_CALLBACK(uwuDebug), NULL);
 
     // link the label and entry field for password from uwuMainUI to here
@@ -109,7 +127,30 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_widget_add_css_class(GTK_WIDGET(uwuEntryPassword), "uwuMainPageEntry"); // add uwuMainPageEntry class to uwuEntryPassword (for css)
     gtk_widget_set_halign(GTK_WIDGET(uwuLabelPassword), GTK_ALIGN_END);
     gtk_widget_set_halign(GTK_WIDGET(uwuEntryPassword), GTK_ALIGN_END);
-    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryPassword), 350, 60);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuLabelPassword), 0, 60);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryPassword), 380, 60);
+
+    // modify bottom field
+    gtk_widget_add_css_class(GTK_WIDGET(uwuFieldBottom), "bot");
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_HORIZONTAL);
+    gtk_box_set_homogeneous(GTK_BOX(uwuFieldBottom), TRUE);
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldBottom), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(uwuFieldBottom), GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuFieldBottom), 600, 150);
+
+    // modify the button field
+    uwuFieldButtonLogin = gtk_builder_get_object(uwuBuilder, "uwuFieldButtonLogin");
+    uwuFieldButtonSignup = gtk_builder_get_object(uwuBuilder, "uwuFieldButtonSignup");
+    gtk_widget_set_halign(GTK_WIDGET(uwuFieldButtonLogin), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldButtonLogin), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(uwuFieldButtonSignup), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldButtonSignup), GTK_ALIGN_CENTER);
+
+    // modify the buttons
+    uwuButtonLogin = gtk_builder_get_object(uwuBuilder, "uwuButtonLogin");
+    uwuButtonSignup = gtk_builder_get_object(uwuBuilder, "uwuButtonSignup");
+    gtk_widget_set_size_request(GTK_WIDGET(uwuButtonLogin), 150, 50);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuButtonSignup), 150, 50);
 
     // make window visible
     gtk_widget_set_visible(GTK_WIDGET(uwuWindow), TRUE);

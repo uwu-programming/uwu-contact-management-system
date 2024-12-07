@@ -51,4 +51,6 @@ void addNode(string username, string password);
 // read all the users from the users.csv and store them into a linked list
 void readUsersFromFile(string filePath);
 
+/*---------------------------------------------------------------*/
+
 #endif
