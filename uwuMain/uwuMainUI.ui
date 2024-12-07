@@ -19,10 +19,18 @@
                         <child>
                             <object id = "uwuFieldName" class = "GtkBox">
                                 <child>
-                                    <object id = "uwuLabelName" class = "GtkLabel"></object>
+                                    <object id = "uwuFieldLabelName" class = "GtkBox">
+                                        <child>
+                                            <object id = "uwuLabelName" class = "GtkLabel"></object>
+                                        </child>
+                                    </object>
                                 </child>
                                 <child>
-                                    <object id = "uwuEntryName" class = "GtkEntry"></object>
+                                    <object id = "uwuFieldEntryName" class = "GtkBox">
+                                        <child>
+                                            <object id = "uwuEntryName" class = "GtkEntry"></object>
+                                        </child>
+                                    </object>
                                 </child>
                             </object>
                         </child>
@@ -30,10 +38,18 @@
                         <child>
                             <object id = "uwuFieldPassword" class = "GtkBox">
                                 <child>
-                                    <object id = "uwuLabelPassword" class = "GtkLabel"></object>
+                                    <object id = "uwuFieldLabelPassword" class ="GtkBox">
+                                        <child>
+                                            <object id = "uwuLabelPassword" class = "GtkLabel"></object>
+                                        </child>
+                                    </object>
                                 </child>
                                 <child>
-                                    <object id = "uwuEntryPassword" class = "GtkEntry"></object>
+                                    <object id = "uwuFieldEntryPassword" class = "GtkBox">
+                                        <child>
+                                            <object id = "uwuEntryPassword" class = "GtkEntry"></object>
+                                        </child>
+                                    </object>
                                 </child>
                             </object>
                         </child>
