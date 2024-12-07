@@ -8,7 +8,9 @@
             <object id = "uwuWindowBox" class = "GtkBox">
                 <!-- top field label: uwu contact management -->
                 <child>
-                    <object id = "uwuFieldTop" class = "GtkBox"></object>
+                    <object id = "uwuFieldTop" class = "GtkBox">
+                        <child><object id = "uwuTitleTop" class = "GtkLabel"></object></child>
+                    </object>
                 </child>
                 
                 <!-- middle field: entry fields -->
@@ -47,7 +49,7 @@
                                 <child>
                                     <object id = "uwuFieldEntryPassword" class = "GtkBox">
                                         <child>
-                                            <object id = "uwuEntryPassword" class = "GtkEntry"></object>
+                                            <object id = "uwuEntryPassword" class = "GtkPasswordEntry"></object>
                                         </child>
                                     </object>
                                 </child>
@@ -58,7 +60,26 @@
 
                 <!-- bottom field: log in buttons -->
                 <child>
-                    <object id = "uwuFieldBottom" class = "GtkBox"></object>
+                    <object id = "uwuFieldBottom" class = "GtkBox">
+                        <child>
+                            <object id = "uwuFieldButtonLogin" class = "GtkBox">
+                                <child>
+                                    <object id = "uwuButtonLogin" class = "GtkButton">
+                                        <property name = "label">Log in</property>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                        <child>
+                            <object id = "uwuFieldButtonSignup" class = "GtkBox">
+                                <child>
+                                    <object id = "uwuButtonSignup" class = "GtkButton">
+                                        <property name = "label">Sign up</property>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
                 </child>
             </object>
         </child>
