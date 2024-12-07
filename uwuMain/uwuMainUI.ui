@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<interface>
+    <!-- declare the main window -->
+    <object id = "uwuWindow" class = "GtkWindow">
+        <!-- uwuWindowBox is the child (main box widget) -->
+        <child>
+            <object id = "uwuWindowBox" class = "GtkBox">
+                <!-- top field label: uwu contact management -->
+                <child>
+                    <object id = "uwuFieldTop" class = "GtkBox"></object>
+                </child>
+                
+                <!-- middle field: entry fields -->
+                <child>
+                    <object id = "uwuFieldMiddle" class = "GtkBox">
+                        <!-- the children of middle field: username & password entry -->
+                        <!-- username label & entry -->
+                        <child>
+                            <object id = "uwuLabelName" class = "GtkLabel"></object>
+                        </child>
+                        <child>
+                            <object id = "uwuEntryName" class = "GtkEntry"></object>
+                        </child>
+                        <!-- password label & entry -->
+                        <child>
+                            <object id = "uwuLabelPassword" class = "GtkLabel"></object>
+                        </child>
+                        <child>
+                            <object id = "uwuEntryPassword" class = "GtkEntry"></object>
+                        </child>
+                    </object>
+                </child>
+
+                <!-- bottom field: log in buttons -->
+                <child>
+                    <object id = "uwuFieldBottom" class = "GtkBox"></object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>
