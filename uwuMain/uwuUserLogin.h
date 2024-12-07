@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "uwuUtility.h"
+
 /*---------------------------------------------------------------*/
 // define constant macro
 
@@ -19,8 +21,6 @@
 
 // global variables
 FILE *uwuUserLoginFile; // FILE pointer to point to users.csv
-
-typedef char* string;
 
 // structure to store username and correspond password
 struct UwUUserLoginDetail{
@@ -52,5 +52,7 @@ void addNode(string username, string password);
 void readUsersFromFile(string filePath);
 
 /*---------------------------------------------------------------*/
+// check if the input username and password are from a eligible user
+boolean checkEligibleLogin(string username, string password);
 
 #endif
