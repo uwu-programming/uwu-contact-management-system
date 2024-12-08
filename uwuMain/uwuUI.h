@@ -28,7 +28,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData);
 
 /*---------------------------------------------------------------*/
 // function for log in button
-static void loginFunction(struct UwUEntryStruct *UwUEntries);
+static void loginFunction();
 
 /*---------------------------------------------------------------*/
 // uwuDebug

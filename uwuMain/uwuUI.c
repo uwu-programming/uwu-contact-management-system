@@ -168,13 +168,11 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
 
 /*---------------------------------------------------------------*/
 // button functions
-static void loginFunction(struct UwUEntryStruct *UwUEntries){
+static void loginFunction(){
     string username, password;
-    GtkEntry *uwuthis = (UwUEntries->uwuEntryUsername);
-    gtk_widget_set_margin_top(GTK_WIDGET(uwuthis), 400);
-    printf("%daaa\n", GTK_IS_ENTRY(uwuthis));
-    //gtk_entry_buffer_get_text(gtk_entry_get_buffer(UwUEntries->uwuEntryUsername));
-    printf("%s???\n", gtk_entry_buffer_get_text(gtk_entry_get_buffer(UwUEntries->uwuEntryUsername)));
+    username = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryUsername), 0, -1);
+    password = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryPassword), 0, -1);
+    printf("uwaaa: %d\n", checkEligibleLogin(username, password));
 }
 
 /*---------------------------------------------------------------*/
