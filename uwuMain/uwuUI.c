@@ -1,5 +1,6 @@
 #include "uwuUI.h"
 #include "uwuUserLogin.h"
+#include "uwuUtility.h"
 
 // main function: creating the root of application (GtkApplication object)
 int createGTKAPP(int argc, char *argv[]){
@@ -30,6 +31,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     GObject *uwuLabelPassword = NULL, *uwuEntryPassword = NULL; // pointer for password's label and text field widget
     GObject *uwuFieldButtonLogin = NULL, *uwuFieldButtonSignup = NULL; // pointer to the login and signup button field
     GObject *uwuButtonLogin = NULL, *uwuButtonSignup = NULL; // pointer for login and signup button
+    GObject *uwuInputUsername = NULL, *uwuInputPassword = NULL;
 
     // create a GtkBuilder object and store it to uwuBuilder
     uwuBuilder = gtk_builder_new();
@@ -130,6 +132,10 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_widget_set_size_request(GTK_WIDGET(uwuLabelPassword), 0, 60);
     gtk_widget_set_size_request(GTK_WIDGET(uwuEntryPassword), 380, 60);
 
+    // structure for storing the entries
+    UwUEntries.uwuEntryUsername = GTK_ENTRY(uwuEntryName);
+    UwUEntries.uwuEntryPassword = GTK_PASSWORD_ENTRY(uwuEntryPassword);
+
     // modify bottom field
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldBottom), "bot");
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_HORIZONTAL);
@@ -149,6 +155,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // modify the buttons
     uwuButtonLogin = gtk_builder_get_object(uwuBuilder, "uwuButtonLogin");
     uwuButtonSignup = gtk_builder_get_object(uwuBuilder, "uwuButtonSignup");
+    g_signal_connect(uwuButtonLogin, "clicked", G_CALLBACK(loginFunction), &UwUEntries);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonLogin), 150, 50);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonSignup), 150, 50);
 
@@ -159,6 +166,18 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     g_object_unref(uwuBuilder);
 }
 
+/*---------------------------------------------------------------*/
+// button functions
+static void loginFunction(struct UwUEntryStruct *UwUEntries){
+    string username, password;
+    GtkEntry *uwuthis = (UwUEntries->uwuEntryUsername);
+    gtk_widget_set_margin_top(GTK_WIDGET(uwuthis), 400);
+    printf("%daaa\n", GTK_IS_ENTRY(uwuthis));
+    //gtk_entry_buffer_get_text(gtk_entry_get_buffer(UwUEntries->uwuEntryUsername));
+    printf("%s???\n", gtk_entry_buffer_get_text(gtk_entry_get_buffer(UwUEntries->uwuEntryUsername)));
+}
+
+/*---------------------------------------------------------------*/
 // test function for debug use
 static void uwuDebug(){
     printf("uwu\n");

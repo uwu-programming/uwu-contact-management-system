@@ -1,6 +1,7 @@
 // include the UI header file
 #include "uwuUI.h"
 #include "uwuUserLogin.h"
+#include "uwuUtility.h"
 
 // main
 int main(int argc, char *argv[]){

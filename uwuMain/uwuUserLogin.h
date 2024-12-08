@@ -20,7 +20,7 @@
 #define MAX_CHAR_LENGTH 1024
 
 // global variables
-FILE *uwuUserLoginFile; // FILE pointer to point to users.csv
+static FILE *uwuUserLoginFile; // FILE pointer to point to users.csv
 
 // structure to store username and correspond password
 struct UwUUserLoginDetail{
@@ -39,7 +39,7 @@ struct UwUUserNode{
 };
 
 // head
-struct UwUUserNode *uwuUserHeadNode = NULL;
+static struct UwUUserNode *uwuUserHeadNode = NULL;
 
 // create a new node
 struct UwUUserNode* createNewNode(string username, string password);
