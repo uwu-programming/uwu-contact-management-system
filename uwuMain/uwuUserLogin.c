@@ -1,7 +1,7 @@
 #include "uwuUserLogin.h"
 
-// function to create a new node
-struct UwUUserNode* createNewNode(string username, string password){
+// function to create a new user node
+struct UwUUserNode* createNewUserNode(string username, string password){
     struct UwUUserNode *uwuNewNode = (struct UwUUserNode*)malloc(sizeof(struct UwUUserNode)); // point to newly created node
     struct UwUUserLoginDetail *uwuNewUser = (struct UwUUserLoginDetail*)malloc(sizeof(struct UwUUserLoginDetail)); // new struct for storing the username and password
     
@@ -21,9 +21,9 @@ struct UwUUserNode* createNewNode(string username, string password){
     return uwuNewNode; // return the pointer to new node
 }
 
-// function to insert a new node (in front)
-void addNode(string username, string password){
-    struct UwUUserNode *uwuNewNode = createNewNode(username, password); // create a new node
+// function to insert a new user node (in front)
+void userAddNode(string username, string password){
+    struct UwUUserNode *uwuNewNode = createNewUserNode(username, password); // create a new node
     uwuNewNode -> next = uwuUserHeadNode; // makes the new node's next points to address of head
     uwuUserHeadNode = uwuNewNode; // makes the new node the head
     UwUUserNodeCount++; // increment the node count by 1
@@ -37,7 +37,7 @@ void readUsersFromFile(string filePath){
     if (uwuUserLoginFile != NULL){
         // loop until output fscanf is not 2 (didn't read 2 string from files)
         while(fscanf(uwuUserLoginFile, "%s %s", username, password) == 2){
-            addNode(username, password); // create a new node of this user data
+            userAddNode(username, password); // create a new node of this user data
         }
     }
 }
@@ -70,6 +70,8 @@ boolean checkEligibleLogin(string username, string password){
 
         // check if username and password match any of the one in linked list
         validLogin = (correctUsername == uwuTrue && correctPassword == uwuTrue ? uwuTrue : uwuFalse);
+        CURRENT_USER = (validLogin ? username : NULL);
+        printf("%s\n", CURRENT_USER);
         tempNode = tempNode -> next; // point to next node
         i++; // increment the loop count
     }

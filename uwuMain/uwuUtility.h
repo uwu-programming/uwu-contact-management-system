@@ -6,6 +6,11 @@ typedef char* string;
 typedef int boolean;
 typedef int index;
 
+typedef char typeName[50];
+typedef char typePhoneNumber[13];
+typedef char typeEmailAddress[321];
+typedef char typeAddress[200];
+
 // enumeration for true and false
 enum UwUBoolean{
     uwuTrue = 1,
