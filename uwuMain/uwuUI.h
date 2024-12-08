@@ -6,15 +6,31 @@
 // header for builder UI
 #include <glib/gstdio.h>
 
+#include "uwuUtility.h"
+#include "uwuUserLogin.h"
+
+/*---------------------------------------------------------------*/
 // global variables
 static GtkCssProvider *uwuCssSource; // pointer to css file
 
+// structure to store entry
+static struct UwUEntryStruct{
+    GtkEntry *uwuEntryUsername;
+    GtkPasswordEntry *uwuEntryPassword;
+}UwUEntries;
+
+/*---------------------------------------------------------------*/
 // fucntion to create GtkApplication object
 int createGTKAPP(int argc, char *argv[]);
 
 // function to start running the app after GtkApplication is created
 static void startApp(GtkApplication *uwuApp, gpointer uwuData);
 
+/*---------------------------------------------------------------*/
+// function for log in button
+static void loginFunction();
+
+/*---------------------------------------------------------------*/
 // uwuDebug
 static void uwuDebug();
 

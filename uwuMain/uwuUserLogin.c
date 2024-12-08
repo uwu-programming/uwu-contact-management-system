@@ -76,8 +76,3 @@ boolean checkEligibleLogin(string username, string password){
 
     return validLogin;
 }
-
-int main(){
-    readUsersFromFile(USERS_CSV);
-    printf("??? %d",checkEligibleLogin("uwuSunshine", "@uwuForA11!aa"));
-}
