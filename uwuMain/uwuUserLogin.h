@@ -21,11 +21,12 @@
 
 // global variables
 static FILE *uwuUserLoginFile; // FILE pointer to point to users.csv
+static string CURRENT_USER;
 
 // structure to store username and correspond password
 struct UwUUserLoginDetail{
-    char username[1024];
-    char password[1024];
+    char username[MAX_CHAR_LENGTH];
+    char password[MAX_CHAR_LENGTH];
 };
 
 /*---------------------------------------------------------------*/
@@ -41,11 +42,11 @@ struct UwUUserNode{
 // head
 static struct UwUUserNode *uwuUserHeadNode = NULL;
 
-// create a new node
-struct UwUUserNode* createNewNode(string username, string password);
+// create a new user node
+struct UwUUserNode* createNewUserNode(string username, string password);
 
-// insert node into linked list
-void addNode(string username, string password);
+// insert new node into user linked list
+void userAddNode(string username, string password);
 
 /*---------------------------------------------------------------*/
 // read all the users from the users.csv and store them into a linked list
