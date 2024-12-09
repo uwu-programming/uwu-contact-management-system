@@ -111,7 +111,50 @@ void createContactButtonArray(){
     struct UwUContactNode *temp = uwuContactHeadNode;
     for (index i = 0; i < UwUContactNodeCount; i++){
         uwuContactButtonArray[i].contact = temp -> contact;
-        uwuContactButtonArray[i].button = gtk_button_new_with_label(uwuContactButtonArray[i].contact->firstName);
+
+        GtkWidget *buttonBox, *firstNameBox, *lastNameBox, *phoneNumberBox, *emailAddressBox, *groupBox;
+        GtkWidget *firstNameLabel, *lastNameLabel, *phoneNumberLabel, *emailAddressLabel, *groupLabel;
+        buttonBox = malloc(sizeof(GtkWidget));
+        firstNameBox = malloc(sizeof(GtkWidget));
+        lastNameBox = malloc(sizeof(GtkWidget));
+        phoneNumberBox = malloc(sizeof(GtkWidget));
+        emailAddressBox = malloc(sizeof(GtkWidget));
+        groupBox = malloc(sizeof(GtkWidget));
+        buttonBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+        firstNameBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+        lastNameBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+        phoneNumberBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+        emailAddressBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+        groupBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+        firstNameLabel = malloc(sizeof(GtkWidget));
+        lastNameLabel = malloc(sizeof(GtkWidget));
+        phoneNumberLabel = malloc(sizeof(GtkWidget));
+        emailAddressLabel = malloc(sizeof(GtkWidget));
+        groupLabel = malloc(sizeof(GtkWidget));
+        firstNameLabel = gtk_label_new(temp->contact->firstName);
+        lastNameLabel = gtk_label_new(temp->contact->lastName);
+        phoneNumberLabel = gtk_label_new(temp->contact->phoneNumber);
+        emailAddressLabel = gtk_label_new(temp->contact->emailAddress);
+        groupLabel = gtk_label_new(temp->contact->address);
+        
+        gtk_box_append(GTK_BOX(firstNameBox), GTK_WIDGET(firstNameLabel));
+        gtk_box_append(GTK_BOX(lastNameBox), GTK_WIDGET(lastNameLabel));
+        gtk_box_append(GTK_BOX(phoneNumberBox), GTK_WIDGET(phoneNumberLabel));
+        gtk_box_append(GTK_BOX(emailAddressBox), GTK_WIDGET(emailAddressLabel));
+        gtk_box_append(GTK_BOX(groupBox), GTK_WIDGET(groupLabel));
+
+        gtk_box_append(GTK_BOX(buttonBox), GTK_WIDGET(firstNameBox));
+        gtk_box_append(GTK_BOX(buttonBox), GTK_WIDGET(lastNameBox));
+        gtk_box_append(GTK_BOX(buttonBox), GTK_WIDGET(phoneNumberBox));
+        gtk_box_append(GTK_BOX(buttonBox), GTK_WIDGET(emailAddressBox));
+        gtk_box_append(GTK_BOX(buttonBox), GTK_WIDGET(groupBox));
+
+        GtkWidget *button = malloc(sizeof(GtkWidget));
+        button = gtk_button_new();
+        gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(buttonBox));
+
+        uwuContactButtonArray[i].button = button;
         temp = temp -> next;
     }
 }
