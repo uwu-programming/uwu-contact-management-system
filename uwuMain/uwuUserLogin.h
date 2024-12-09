@@ -22,8 +22,8 @@ extern string CURRENT_USER;
 
 // structure to store username and correspond password
 struct UwUUserLoginDetail{
-    char username[MAX_CHAR_LENGTH];
-    char password[MAX_CHAR_LENGTH];
+    uwuName username;
+    uwuPassword password;
 };
 
 /*---------------------------------------------------------------*/
@@ -52,8 +52,5 @@ void readUsersFromFile(string filePath);
 /*---------------------------------------------------------------*/
 // check if the input username and password are from a eligible user
 boolean checkEligibleLogin(string username, string password);
-
-// set the current user
-static void setCurrentUser();
 
 #endif

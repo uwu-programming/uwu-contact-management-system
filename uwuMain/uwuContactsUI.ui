@@ -13,7 +13,7 @@
                 <!-- search field -->
                 <child>
                     <object id = "uwuFieldSearch" class = "GtkBox">
-
+                        <child><object id = "uwuSearchEntry" class = "GtkSearchEntry"></object></child>
                     </object>
                 </child>
                 <!-- setting field -->

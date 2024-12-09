@@ -10,8 +10,11 @@ int main(int argc, char *argv[]){
     // read available users
     readUsersFromFile(USERS_CSV);
 
+    // read data
+    readContactFromFile("contacts/uwuSunshine.csv");
+
     // run the UI uwu
     int status = createGTKAPP(argc, argv);
-
+    
     return status; // return the status after running createGTKAPP
 }

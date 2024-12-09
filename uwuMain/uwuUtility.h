@@ -10,11 +10,12 @@ typedef int boolean;
 typedef int index;
 
 typedef char uwuName[50];
+typedef uwuName uwuPassword;
 typedef char uwuPhoneNumber[13];
 typedef char uwuEmailAddress[321];
 typedef char uwuAddress[200];
 
-typedef char uwuLabelString[MAX_CHAR_LENGTH+50];
+typedef char uwuLabelString[50+20];
 
 // enumeration for true and false
 enum UwUBoolean{

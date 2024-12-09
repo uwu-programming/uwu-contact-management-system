@@ -14,11 +14,11 @@ extern FILE *uwuUserContactFile;
 /*---------------------------------------------------------------*/
 // structure to store a user's contact information
 struct UwUContactInformation{
-    uwuName *firstName;
-    uwuName *lastName;
-    uwuPhoneNumber *phoneNumber;
-    uwuEmailAddress *emailAddress;
-    uwuAddress *address;
+    uwuName firstName;
+    uwuName lastName;
+    uwuPhoneNumber phoneNumber;
+    uwuEmailAddress emailAddress;
+    uwuAddress address;
 };
 
 /*---------------------------------------------------------------*/
@@ -35,14 +35,14 @@ struct UwUContactNode{
 extern struct UwUContactNode *uwuContactHeadNode;
 
 // create a new contact node
-struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address);
+static struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address);
 
 // insert new node into contact linked list
-void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address);
+static void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address);
 
 /*---------------------------------------------------------------*/
 // read all the contacts from [username].csv and store them into a linked list
-void readContactFromFile(string username);
+extern void readContactFromFile(string username);
 
 // read a specific field from [username].csv
 boolean uwuReadContactField(string storeTo);
