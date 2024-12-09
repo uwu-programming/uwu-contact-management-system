@@ -25,7 +25,20 @@
             </object>
         </child>
         <child>
-            <object id = "uwuFieldBottom" class = "GtkBox"></object>
+            <object id = "uwuFieldBottom" class = "GtkBox">
+                <child>
+                    <object id = "uwuFrameFieldBottom" class = 'GtkFrame'>
+                        <child>
+                            <object id = "uwuFrameScrollWindow" class = "GtkScrolledWindow">
+                                <child>
+                                    <object id = "uwuContactListBox" class = "GtkListBox">
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
         </child>
     </object>
 </interface>

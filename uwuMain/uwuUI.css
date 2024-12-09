@@ -8,7 +8,6 @@
 
 .uwuMainPageLabel{
     background-image: none;
-    background-color: pink;
     color: black;
     font-size: 40px;
     font-weight: bold;
@@ -18,30 +17,6 @@
 .uwuMainPageEntry{
     color: black;
     font-size: 30px;
-}
-
-.uwutest{
-    background-color: purple;
-}
-
-.uwutest2{
-    background-color: aqua;
-}
-
-.uwutest3{
-    background-color: darksalmon;
-}
-
-.fieldcss{
-    background-color: dimgray;
-}
-
-.bot{
-    background-color: royalblue;
-}
-
-.top{
-    background-color: rebeccapurple;
 }
 
 .uwuContactFieldTop{

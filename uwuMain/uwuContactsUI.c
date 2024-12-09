@@ -10,6 +10,7 @@ void startContactsUI(GObject *uwuWindow){
     GObject *uwuFieldTop = NULL, *uwuFieldBottom = NULL;
     GObject *uwuFieldProfile = NULL, *uwuFieldSearch = NULL, *uwuFieldSetting = NULL;
     GObject *uwuProfileLabel = NULL, *uwuSearchEntry;
+    GObject *uwuFrameFieldBottom = NULL, *uwuFrameScrollWindow, *uwuContactListBox = NULL;
 
     // create GtkBuilder
     uwuBuilder = gtk_builder_new_from_file("uwuContactsUI.ui");
@@ -33,18 +34,24 @@ void startContactsUI(GObject *uwuWindow){
     uwuProfileLabel = gtk_builder_get_object(uwuBuilder, "uwuProfileLabel");
     uwuSearchEntry = gtk_builder_get_object(uwuBuilder, "uwuSearchEntry");
 
+    // link the widget in bottom field
+    uwuFrameFieldBottom = gtk_builder_get_object(uwuBuilder, "uwuFrameFieldBottom");
+    uwuFrameScrollWindow = gtk_builder_get_object(uwuBuilder, "uwuFrameScrollWindow");
+    uwuContactListBox = gtk_builder_get_object(uwuBuilder, "uwuContactListBox");
+
     // modify top and bottom field
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldTop), "uwuContactFieldTop");
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldBottom), "uwuContactFieldBottom");
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldTop), GTK_ORIENTATION_HORIZONTAL);
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldTop), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(uwuFieldTop), 0, 80);
+    gtk_widget_set_valign(GTK_WIDGET(uwuFieldBottom), GTK_ALIGN_FILL);
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_VERTICAL);
 
     // modify profile field
-    uwuLabelString *userLabel;
-    userLabel = malloc(sizeof(userLabel));
-    //getCurrentUserLabel(*userLabel);
-    gtk_label_set_label(GTK_LABEL(uwuProfileLabel), CURRENT_USER);
+    uwuLabelString userLabel;
+    getCurrentUserLabel(userLabel);
+    gtk_label_set_label(GTK_LABEL(uwuProfileLabel), userLabel);
     gtk_widget_set_size_request(GTK_WIDGET(uwuProfileLabel), 200, 0);
 
     // modify search field
@@ -58,6 +65,13 @@ void startContactsUI(GObject *uwuWindow){
     // modify setting field
     gtk_widget_set_size_request(GTK_WIDGET(uwuFieldSetting), 300, 0);
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldSetting), GTK_ALIGN_END);
+
+    // modify frame field and contact list box
+    gtk_frame_set_label(GTK_FRAME(uwuFrameFieldBottom), "UwU contacts");
+    gtk_widget_set_valign(GTK_WIDGET(uwuFrameFieldBottom), GTK_ALIGN_FILL);
+    gtk_widget_set_valign(GTK_WIDGET(uwuFrameScrollWindow), GTK_ALIGN_FILL);
+    gtk_widget_set_valign(GTK_WIDGET(uwuContactListBox), GTK_ALIGN_FILL);
+    gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(uwuFrameScrollWindow), 450);
 
     // testing
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldProfile), "uwup");

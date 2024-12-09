@@ -13,4 +13,6 @@ void startContactsUI(GObject *uwuWindow);
 // function to get label decoration for profile label
 void getCurrentUserLabel(string storeTo);
 
+// function to create list button according to data in contact linked list
+
 #endif
