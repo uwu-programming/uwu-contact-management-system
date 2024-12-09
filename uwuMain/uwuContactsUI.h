@@ -25,7 +25,13 @@ void getCurrentUserLabel(string storeTo);
 // function to create an array of button according to data in contact linked list
 void createContactButtonArray();
 
+// function to remove all buttons from the scroll window
+void removeButtonFromWindow(GObject *listbox);
+
 // function to put all button in array to the scroll window
-void assembleButtonToWindow(GObject *scrollWindow);
+void assembleButtonToWindow(GObject *listBox);
+
+// function to sort name by first name, lexicographical order
+void sortContactAscendingName();
 
 #endif

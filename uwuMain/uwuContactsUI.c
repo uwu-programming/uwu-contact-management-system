@@ -83,6 +83,7 @@ void startContactsUI(GObject *uwuWindow){
 
     // insert the contact button
     createContactButtonArray();
+    sortContactAscendingName();
     assembleButtonToWindow(uwuContactListBox);
 
     // testing
@@ -110,14 +111,35 @@ void createContactButtonArray(){
     struct UwUContactNode *temp = uwuContactHeadNode;
     for (index i = 0; i < UwUContactNodeCount; i++){
         uwuContactButtonArray[i].contact = temp -> contact;
-        printf("%s ", uwuContactButtonArray[i].contact->phoneNumber);
         uwuContactButtonArray[i].button = gtk_button_new_with_label(uwuContactButtonArray[i].contact->firstName);
         temp = temp -> next;
     }
 }
 
-void assembleButtonToWindow(GObject *scrollWindow){
+// function to remove all buttons from the scroll window
+void removeButtonFromWindow(GObject *listbox){
+    gtk_list_box_remove_all(GTK_LIST_BOX(listbox));
+}
+
+// function to put all button in array to the scroll window
+void assembleButtonToWindow(GObject *listBox){
     for (index i = 0; i < UwUContactNodeCount; i++){
-        gtk_list_box_prepend(GTK_LIST_BOX(scrollWindow), GTK_WIDGET(uwuContactButtonArray[i].button));
+        gtk_list_box_prepend(GTK_LIST_BOX(listBox), GTK_WIDGET(uwuContactButtonArray[i].button));
+    }
+}
+
+// function to sort name by first name, lexicographical order
+void sortContactAscendingName(){
+    struct UwUContactButton hold;
+    for (index i = 0; i < UwUContactNodeCount - 1; i++){
+        for (index j = 0; j < UwUContactNodeCount - i - 1; j++){
+            if (strcmp(uwuContactButtonArray[j].contact->firstName, uwuContactButtonArray[j+1].contact->firstName) <= 0){
+                hold.contact = uwuContactButtonArray[j].contact;
+                hold.button = uwuContactButtonArray[j].button;
+                uwuContactButtonArray[j] = uwuContactButtonArray[j+1];
+                uwuContactButtonArray[j+1].contact = hold.contact;
+                uwuContactButtonArray[j+1].button = hold.button;
+            }
+        }
     }
 }
