@@ -14,11 +14,11 @@ static FILE *uwuUserContactFile;
 /*---------------------------------------------------------------*/
 // structure to store a user's contact information
 struct UwUContactInformation{
-    typeName firstName;
-    typeName lastName;
-    typePhoneNumber phoneNumber;
-    typeEmailAddress emailAddress;
-    typeAddress address;
+    uwuName *firstName;
+    uwuName *lastName;
+    uwuPhoneNumber *phoneNumber;
+    uwuEmailAddress *emailAddress;
+    uwuAddress *address;
 };
 
 /*---------------------------------------------------------------*/
@@ -45,6 +45,6 @@ void contactAddNode(string firstName, string lastName, string phoneNumber, strin
 void readContactFromFile(string username);
 
 // read a specific field from [username].csv
-void uwuReadContactField(string storeTo);
+boolean uwuReadContactField(string storeTo);
 
 #endif
