@@ -37,7 +37,9 @@
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": ["C:/msys64/ucrt64/include/gtk-4.0"],
+  "C_Cpp_Runner.includePaths": [
+    "C:/msys64/ucrt64/include/gtk-4.0"
+  ],
   "C_Cpp_Runner.includeSearch": [
     "*",
     "**/*"

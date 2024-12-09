@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<interface>
+    <object id = "uwuWindowBox" class = "GtkBox">
+        <child>
+            <object id = "uwuFieldTop" class = "GtkBox"></object>
+        </child>
+        <child>
+            <object id = "uwuFieldBottom" class = "GtkBox"></object>
+        </child>
+    </object>
+</interface>

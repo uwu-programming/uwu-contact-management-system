@@ -1,4 +1,4 @@
-#include "uwuUI.h"
+#include "uwuMainUI.h"
 #include "uwuUserLogin.h"
 #include "uwuUtility.h"
 
@@ -155,7 +155,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // modify the buttons
     uwuButtonLogin = gtk_builder_get_object(uwuBuilder, "uwuButtonLogin");
     uwuButtonSignup = gtk_builder_get_object(uwuBuilder, "uwuButtonSignup");
-    g_signal_connect(uwuButtonLogin, "clicked", G_CALLBACK(loginFunction), &UwUEntries);
+    g_signal_connect(uwuButtonLogin, "clicked", G_CALLBACK(loginFunction), uwuWindow);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonLogin), 150, 50);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonSignup), 150, 50);
 
@@ -168,11 +168,15 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
 
 /*---------------------------------------------------------------*/
 // button functions
-static void loginFunction(){
+static void loginFunction(GtkButton *uwuButton, GObject *uwuWindow){
     string username, password;
     username = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryUsername), 0, -1);
     password = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryPassword), 0, -1);
-    printf("uwaaa: %d\n", checkEligibleLogin(username, password));
+
+    if (checkEligibleLogin(username, password) == uwuTrue){
+        GtkBuilder *uwuBuilder = gtk_builder_new_from_file("uwuContactsUI.ui");
+        gtk_window_set_child(GTK_WINDOW(uwuWindow), GTK_WIDGET(gtk_builder_get_object(uwuBuilder, "uwuWindowBox")));
+    }
 }
 
 /*---------------------------------------------------------------*/
