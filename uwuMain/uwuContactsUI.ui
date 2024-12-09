@@ -4,9 +4,22 @@
     <object id = "uwuWindowBox" class = "GtkBox">
         <child>
             <object id = "uwuFieldTop" class = "GtkBox">
+                <!-- profile field -->
                 <child>
-                    <object id = "a" class = "GtkButton">
-                        <property name = "label">waaaaaaaa</property>
+                    <object id = "uwuFieldProfile" class = "GtkBox">
+                        <child><object id = "uwuProfileLabel" class = "GtkLabel"></object></child>
+                    </object>
+                </child>
+                <!-- search field -->
+                <child>
+                    <object id = "uwuFieldSearch" class = "GtkBox">
+
+                    </object>
+                </child>
+                <!-- setting field -->
+                <child>
+                    <object id = "uwuFieldSetting" class = "GtkBox">
+
                     </object>
                 </child>
             </object>

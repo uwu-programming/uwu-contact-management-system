@@ -9,7 +9,7 @@
 #define PATH_TO_CONTACT_DATA "contacts/"
 
 // global variables
-static FILE *uwuUserContactFile;
+extern FILE *uwuUserContactFile;
 
 /*---------------------------------------------------------------*/
 // structure to store a user's contact information
@@ -23,7 +23,7 @@ struct UwUContactInformation{
 
 /*---------------------------------------------------------------*/
 // linked list for userContact
-static int UwUContactNodeCount = 0;
+extern int UwUContactNodeCount;
 
 // node
 struct UwUContactNode{
@@ -32,7 +32,7 @@ struct UwUContactNode{
 };
 
 // head
-static struct UwUContactNode *uwuContactHeadNode = NULL;
+extern struct UwUContactNode *uwuContactHeadNode;
 
 // create a new contact node
 struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address);

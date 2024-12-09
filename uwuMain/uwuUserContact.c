@@ -1,6 +1,11 @@
 #include "uwuUserContact.h"
 #include "uwuUtility.h"
 
+// declare value for extern
+int UwUContactNodeCount = 0;
+FILE *uwuUserContactFile = NULL;
+struct UwUContactNode *uwuContactHeadNode = NULL;
+
 // function to create a new contact node
 struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address){
     struct UwUContactNode *uwuNewNode = (struct UwUContactNode*)malloc(sizeof(struct UwUContactNode));

@@ -10,4 +10,7 @@
 // function to create the contacts UI
 void startContactsUI(GObject *uwuWindow);
 
+// function to get label decoration for profile label
+void getCurrentUserLabel(string storeTo);
+
 #endif
