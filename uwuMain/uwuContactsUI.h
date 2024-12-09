@@ -4,7 +4,16 @@
 #include <gtk/gtk.h>
 #include "uwuMainUI.h"
 #include "uwuUserLogin.h"
+#include "uwuUserContact.h"
 #include "uwuUtility.h"
+
+/*---------------------------------------------------------------*/
+struct UwUContactButton{
+    struct UwUContactInformation *contact;
+    GtkWidget *button;
+};
+
+extern struct UwUContactButton *uwuContactButtonArray;
 
 /*---------------------------------------------------------------*/
 // function to create the contacts UI
@@ -13,6 +22,10 @@ void startContactsUI(GObject *uwuWindow);
 // function to get label decoration for profile label
 void getCurrentUserLabel(string storeTo);
 
-// function to create list button according to data in contact linked list
+// function to create an array of button according to data in contact linked list
+void createContactButtonArray();
+
+// function to put all button in array to the scroll window
+void assembleButtonToWindow(GObject *scrollWindow);
 
 #endif

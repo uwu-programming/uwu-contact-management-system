@@ -1,6 +1,11 @@
-#include "uwuContactsUI.h"
+#include "uwuMainUI.h"
 #include "uwuUserLogin.h"
+#include "uwuUtility.h"
+#include "uwuContactsUI.h"
 #include "uwuUserContact.h"
+
+// define value for extern variable
+struct UwUContactButton *uwuContactButtonArray = NULL;
 
 // function to create the contacts window and widgets
 void startContactsUI(GObject *uwuWindow){
@@ -73,6 +78,13 @@ void startContactsUI(GObject *uwuWindow){
     gtk_widget_set_valign(GTK_WIDGET(uwuContactListBox), GTK_ALIGN_FILL);
     gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(uwuFrameScrollWindow), 450);
 
+    // gtets
+    readContactFromFile("contacts/uwuSunshine.csv");
+
+    // insert the contact button
+    createContactButtonArray();
+    assembleButtonToWindow(uwuContactListBox);
+
     // testing
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldProfile), "uwup");
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldSetting), "uwusf");
@@ -89,4 +101,23 @@ void getCurrentUserLabel(string storeTo){
     for (; CURRENT_USER[j] != '\0'; j++)
         storeTo[i++] = CURRENT_USER[j];
     storeTo[i] = '\0';
+}
+
+void createContactButtonArray(){
+    free(uwuContactButtonArray); // free the previous address
+    uwuContactButtonArray = malloc(sizeof(struct UwUContactButton) * UwUContactNodeCount); // allocate memory for array
+
+    struct UwUContactNode *temp = uwuContactHeadNode;
+    for (index i = 0; i < UwUContactNodeCount; i++){
+        uwuContactButtonArray[i].contact = temp -> contact;
+        printf("%s ", uwuContactButtonArray[i].contact->phoneNumber);
+        uwuContactButtonArray[i].button = gtk_button_new_with_label(uwuContactButtonArray[i].contact->firstName);
+        temp = temp -> next;
+    }
+}
+
+void assembleButtonToWindow(GObject *scrollWindow){
+    for (index i = 0; i < UwUContactNodeCount; i++){
+        gtk_list_box_prepend(GTK_LIST_BOX(scrollWindow), GTK_WIDGET(uwuContactButtonArray[i].button));
+    }
 }

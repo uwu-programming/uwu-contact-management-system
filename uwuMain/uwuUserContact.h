@@ -42,7 +42,7 @@ static void contactAddNode(string firstName, string lastName, string phoneNumber
 
 /*---------------------------------------------------------------*/
 // read all the contacts from [username].csv and store them into a linked list
-extern void readContactFromFile(string username);
+void readContactFromFile(string username);
 
 // read a specific field from [username].csv
 boolean uwuReadContactField(string storeTo);
