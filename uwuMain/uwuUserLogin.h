@@ -43,10 +43,10 @@ struct UwUUserNode{
 static struct UwUUserNode *uwuUserHeadNode = NULL;
 
 // create a new user node
-struct UwUUserNode* createNewUserNode(string username, string password);
+static struct UwUUserNode* createNewUserNode(string username, string password);
 
 // insert new node into user linked list
-void userAddNode(string username, string password);
+static void userAddNode(string username, string password);
 
 /*---------------------------------------------------------------*/
 // read all the users from the users.csv and store them into a linked list

@@ -3,7 +3,13 @@
 <interface>
     <object id = "uwuWindowBox" class = "GtkBox">
         <child>
-            <object id = "uwuFieldTop" class = "GtkBox"></object>
+            <object id = "uwuFieldTop" class = "GtkBox">
+                <child>
+                    <object id = "a" class = "GtkButton">
+                        <property name = "label">waaaaaaaa</property>
+                    </object>
+                </child>
+            </object>
         </child>
         <child>
             <object id = "uwuFieldBottom" class = "GtkBox"></object>

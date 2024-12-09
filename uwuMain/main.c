@@ -2,6 +2,8 @@
 #include "uwuMainUI.h"
 #include "uwuUserLogin.h"
 #include "uwuUtility.h"
+#include "uwuContactsUI.h"
+#include "uwuUserContact.h"
 
 // main
 int main(int argc, char *argv[]){

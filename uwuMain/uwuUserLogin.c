@@ -1,7 +1,7 @@
 #include "uwuUserLogin.h"
 
 // function to create a new user node
-struct UwUUserNode* createNewUserNode(string username, string password){
+static struct UwUUserNode* createNewUserNode(string username, string password){
     struct UwUUserNode *uwuNewNode = (struct UwUUserNode*)malloc(sizeof(struct UwUUserNode)); // point to newly created node
     struct UwUUserLoginDetail *uwuNewUser = (struct UwUUserLoginDetail*)malloc(sizeof(struct UwUUserLoginDetail)); // new struct for storing the username and password
     
@@ -22,7 +22,7 @@ struct UwUUserNode* createNewUserNode(string username, string password){
 }
 
 // function to insert a new user node (in front)
-void userAddNode(string username, string password){
+static void userAddNode(string username, string password){
     struct UwUUserNode *uwuNewNode = createNewUserNode(username, password); // create a new node
     uwuNewNode -> next = uwuUserHeadNode; // makes the new node's next points to address of head
     uwuUserHeadNode = uwuNewNode; // makes the new node the head

@@ -78,6 +78,7 @@ boolean uwuReadContactField(string storeTo){
     return uwuTrue;
 }
 
+/*
 int main(){
     index i = 0;
     //uwuUserContactFile = fopen("contacts/uwuSunshine.csv", READ);
@@ -89,3 +90,4 @@ int main(){
         temp = temp -> next;
     }
 }
+*/
