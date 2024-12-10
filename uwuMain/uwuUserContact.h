@@ -20,6 +20,7 @@ struct UwUContactInformation{
     uwuPhoneNumber phoneNumber;
     uwuEmailAddress emailAddress;
     uwuName group;
+    uwuReference referenceNumber;
 };
 
 /*---------------------------------------------------------------*/

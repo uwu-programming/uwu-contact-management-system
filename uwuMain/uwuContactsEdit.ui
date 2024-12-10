@@ -1,0 +1,81 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<interface>
+    <object id = "uwuWindowBox" class = "GtkBox">
+        <child>
+            <!-- title field -->
+            <object id ="uwuFieldTop" class = "GtkBox">
+                <child><object id = "uwuTitleTop" class = "GtkLabel"></object></child>
+            </object>
+        </child>
+
+        <child>
+            <!-- edit field -->
+            <object id = "uwuFieldMid" class = "GtkBox">
+                <child>
+                    <object id = "uwuFrameMid" class = "GtkFrame">
+                        <child>
+                            <object id = "uwuBoxMid" class = "GtkBox">
+                                <!-- field for first name entry -->
+                                <child>
+                                    <object id = "uwuFirstNameBox" class = "GtkBox">
+                                        <child><object id = "uwuLabelFirstName" class = "GtkLabel"></object></child>
+                                        <child><object id = "uwuEntryFirstName" class = "GtkEntry"></object></child>
+                                    </object>
+                                </child>
+                                <!-- field for last name entry -->
+                                <child>
+                                    <object id = "uwuLastNameBox" class = "GtkBox">
+                                        <child><object id = "uwuLabelLastName" class = "GtkLabel"></object></child>
+                                        <child><object id = "uwuEntryLastName" class = "GtkEntry"></object></child>
+                                    </object>
+                                </child>
+                                <!-- field for phone number entry -->
+                                <child>
+                                    <object id = "uwuPhoneNumberBox" class = "GtkBox">
+                                        <child><object id = "uwuLabelPhoneNumber" class = "GtkLabel"></object></child>
+                                        <child><object id = "uwuEntryPhoneNumber" class = "GtkEntry"></object></child>
+                                    </object>
+                                </child>
+                                <!-- field for email address entry -->
+                                <child>
+                                    <object id = "uwuEmailAddressBox" class = "GtkBox">
+                                        <child><object id = "uwuLabelEmailAddress" class = "GtkLabel"></object></child>
+                                        <child><object id = "uwuEntryEmailAddress" class = "GtkEntry"></object></child>
+                                    </object>
+                                </child>
+                                <!-- field for group entry -->
+                                <child>
+                                    <object id = "uwuGroupBox" class = "GtkBox">
+                                        <child><object id = "uwuLabelGroup" class = "GtkLabel"></object></child>
+                                        <child><object id = "uwuEntryGroup" class = "GtkEntry"></object></child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+
+        <child>
+            <!-- save / cancel / delete field -->
+            <object id = "uwuFieldBottom" class = "GtkBox">
+                <child>
+                    <object id = "uwuBottomSpace" class = "GtkBox"></object>
+                    <object id = "uwuBottomButtonField" class = "GtkBox">
+                        <child>
+                            <object id = "uwuButtonSave" class = "GtkButton"></object>
+                        </child>
+                        <child>
+                            <object id = "uwuButtonCancel" class = "GtkButton"></object>
+                        </child>
+                        <child>
+                            <object id = "uwuButtonDelete" class = "GtkButton"></object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>

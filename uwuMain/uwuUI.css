@@ -1,7 +1,7 @@
 .uwuTopTitle{
     background-image: none;
-    color: pink;
-    font-size: 45px;
+    color: #e00f82;
+    font-size: 50px;
     font-weight: bolder;
     font-family: monospace;
 }
@@ -20,11 +20,11 @@
 }
 
 .uwuContactFieldTop{
-    background-color: aquamarine;
+    background-color: #ffb6c1;
 }
 
 .uwuContactFieldBottom{
-    background-color: cyan;
+    background-color:#fdb3da;
 }
 
 .uwup{
@@ -32,9 +32,23 @@
 }
 
 .uwusf{
-    background-color: azure;
+    background-color: #FFb6c1;
 }
 
 .uwus{
-    background-color: crimson;
+    background-color: #FFE4E1;
+}
+
+/* css for edit ui */
+.uwuEditTitleTop{
+    color: #e00f82;
+    font-size: 40px;
+    font-weight: bolder;
+    font-family: monospace;
+    margin: 20px;
+}
+
+.uwuEditFrameMid{
+    padding: 15px;
+    margin: 15px;
 }

@@ -1,8 +1,4 @@
-#include "uwuMainUI.h"
-#include "uwuUserLogin.h"
-#include "uwuUtility.h"
 #include "uwuContactsUI.h"
-#include "uwuUserContact.h"
 
 // define value for extern variable
 struct UwUContactButton *uwuContactButtonArray = NULL;
@@ -33,7 +29,10 @@ static void conditionAddNode(string condition, index startFrom){
 
 /*---------------------------------------------------------------*/
 // function to create the contacts window and widgets
-void startContactsUI(GObject *uwuWindow){
+void startContactsUI(){
+    // read the contact information of this user
+    readContactFromFile(CURRENT_USER); 
+
     // define variables
     GtkBuilder *uwuBuilder = NULL;
     GObject *uwuWindowBox = NULL;
@@ -189,6 +188,7 @@ void createContactButtonArray(){
 
         GtkWidget *button = malloc(sizeof(GtkWidget));
         button = gtk_button_new();
+        g_signal_connect(button, "clicked", G_CALLBACK(selectContact), &(temp->contact->referenceNumber));
         gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(buttonBox));
 
         uwuContactButtonArray[i].button = button;
@@ -265,4 +265,11 @@ void sortContactAscendingName(){
             }
         }
     }
+}
+
+/*---------------------------------------------------------------*/
+// function of the contact button
+void selectContact(GObject *button, uwuReference *reference){
+    printf("%d ", *reference);
+    startEditUI(*reference);
 }

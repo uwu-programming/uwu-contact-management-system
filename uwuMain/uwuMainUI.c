@@ -4,6 +4,10 @@
 #include "uwuContactsUI.h"
 #include "uwuUserContact.h"
 
+// initialize extern variable
+GObject *uwuWindow = NULL;
+GtkCssProvider *uwuCssSource = NULL;
+
 // main function: creating the root of application (GtkApplication object)
 int createGTKAPP(int argc, char *argv[]){
     // define variables
@@ -23,7 +27,6 @@ int createGTKAPP(int argc, char *argv[]){
 static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // define variables
     GtkBuilder *uwuBuilder = NULL; // GtkBuilder pointer
-    GObject *uwuWindow = NULL; // pointer for window widget
     GObject *uwuWindowBox = NULL; // pointer for window's child, the box layout
     GObject *uwuFieldTop = NULL, *uwuFieldMiddle = NULL, *uwuFieldBottom = NULL; // pointer for the three field
     GObject *uwuTitleTop = NULL; // pointer for the title on top field
@@ -156,7 +159,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // modify the buttons
     uwuButtonLogin = gtk_builder_get_object(uwuBuilder, "uwuButtonLogin");
     uwuButtonSignup = gtk_builder_get_object(uwuBuilder, "uwuButtonSignup");
-    g_signal_connect(uwuButtonLogin, "clicked", G_CALLBACK(loginFunction), uwuWindow);
+    g_signal_connect(uwuButtonLogin, "clicked", G_CALLBACK(loginFunction), NULL);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonLogin), 150, 50);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonSignup), 150, 50);
 
@@ -169,14 +172,13 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
 
 /*---------------------------------------------------------------*/
 // button functions
-static void loginFunction(GtkButton *uwuButton, GObject *uwuWindow){
+static void loginFunction(GtkButton *uwuButton){
     string username, password;
     username = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryUsername), 0, -1);
     password = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryPassword), 0, -1);
 
     // login and create the contact screen if username and password are right
-    if (checkEligibleLogin(username, password) == uwuTrue){  
-        readContactFromFile(CURRENT_USER);      
-        startContactsUI(uwuWindow);
+    if (checkEligibleLogin(username, password) == uwuTrue){     
+        startContactsUI();
     }
 }

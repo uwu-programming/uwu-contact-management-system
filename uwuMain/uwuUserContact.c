@@ -28,6 +28,8 @@ static struct UwUContactNode* createNewContactNode(string firstName, string last
         uwuNewContact -> group[m] = group[m];
     uwuNewContact -> group[m] = '\0';
 
+    uwuNewContact -> referenceNumber = UwUContactNodeCount;
+
     uwuNewNode -> contact = uwuNewContact;
 
     return uwuNewNode;
