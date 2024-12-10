@@ -101,9 +101,9 @@ boolean uwuReadContactField(string storeTo){
 
 /*
 int main(){
-    index i = 0;
     //uwuUserContactFile = fopen("contacts/uwuSunshine.csv", READ);
     readContactFromFile("contacts/uwuSunshine.csv");
+    index i = 0;
     struct UwUContactNode *temp = uwuContactHeadNode;
     while (i < UwUContactNodeCount){
         printf("%s\n", temp -> contact ->phoneNumber);

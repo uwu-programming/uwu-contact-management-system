@@ -8,12 +8,32 @@
 #include "uwuUtility.h"
 
 /*---------------------------------------------------------------*/
+// struct to store the contact and button reference
 struct UwUContactButton{
     struct UwUContactInformation *contact;
     GtkWidget *button;
 };
 
 extern struct UwUContactButton *uwuContactButtonArray;
+
+/*---------------------------------------------------------------*/
+// linked list for conditions
+extern int UwUConditionNodeCount;
+
+// node
+struct UwUConditionNode{
+    uwuMaxString condition;
+    struct UwUConditionNode *next;
+};
+
+// head
+extern struct UwUConditionNode *uwuConditionHeadNode;
+
+// create a new condition node
+static struct UwUConditionNode* createNewConditionNode(string condition, index startFrom);
+
+// insert new node into 
+static void conditionAddNode(string condition, index startFrom);
 
 /*---------------------------------------------------------------*/
 // function to create the contacts UI

@@ -6,7 +6,32 @@
 
 // define value for extern variable
 struct UwUContactButton *uwuContactButtonArray = NULL;
+struct UwUConditionNode *uwuConditionHeadNode = NULL;
+int UwUConditionNodeCount = 0;
 
+/*---------------------------------------------------------------*/
+// the condition linked list
+// create a new node
+struct UwUConditionNode* createNewConditionNode(string condition, index startFrom){
+    struct UwUConditionNode *uwuNewNode = (struct UwUConditionNode*)malloc(sizeof(struct UwUConditionNode));
+    index i = 0;
+
+    for (i = 0; condition[i+startFrom] != '\0' && condition[i+startFrom] != ','; i++)
+        uwuNewNode -> condition[i] = condition[i+startFrom];
+    uwuNewNode->condition[i] = '\0';
+
+    return uwuNewNode;
+}
+
+// add the new node to the linked list
+static void conditionAddNode(string condition, index startFrom){
+    struct UwUConditionNode *uwuNewNode = createNewConditionNode(condition, startFrom);
+    uwuNewNode -> next = uwuConditionHeadNode;
+    uwuConditionHeadNode = uwuNewNode;
+    UwUConditionNodeCount++;
+}
+
+/*---------------------------------------------------------------*/
 // function to create the contacts window and widgets
 void startContactsUI(GObject *uwuWindow){
     // define variables
@@ -186,6 +211,25 @@ void assembleButtonToWindow(GObject *listBox){
 // function to put button in array to the scroll window if a keyword is met
 void assembleButtonToWindowWithCondition(string condition, GObject *listBox){
     string firstName, lastName, phoneNumber, emailAddress, group;
+    int numOfConditions = 0;
+    for (index i = 0; condition[i] != '\0'; i++)
+        if (condition[i] == ',')
+            numOfConditions++;
+    numOfConditions++;
+
+    index j = 0;
+    int *conditionBreakpoint = malloc(sizeof(int) * numOfConditions);
+    conditionBreakpoint[0] = 0;
+    for (index i = 0; condition[i] != '\0'; i++)
+        if (condition[i] == ',')
+            conditionBreakpoint[++j] = ++i;
+
+    free(uwuConditionHeadNode);
+    UwUConditionNodeCount = 0;
+
+    for (index i = 0; i < numOfConditions; i++){
+        conditionAddNode(condition, conditionBreakpoint[i]);
+    }
 
     for (index i = 0; i < UwUContactNodeCount; i++){
         firstName = uwuContactButtonArray[i].contact->firstName;
@@ -194,8 +238,15 @@ void assembleButtonToWindowWithCondition(string condition, GObject *listBox){
         emailAddress = uwuContactButtonArray[i].contact->emailAddress;
         group = uwuContactButtonArray[i].contact->group;
 
-        if (checkStringIsIn(condition, firstName) || checkStringIsIn(condition, lastName) || checkStringIsIn(condition, phoneNumber) || checkStringIsIn(condition, emailAddress) || checkStringIsIn(condition, group)){
-            gtk_list_box_append(GTK_LIST_BOX(listBox), GTK_WIDGET(uwuContactButtonArray[i].button));
+        string thisCondition;
+        struct UwUConditionNode *temp = uwuConditionHeadNode;
+        for (index j = 0; j < UwUConditionNodeCount; j++){
+            thisCondition = temp -> condition;
+            if (checkStringIsIn(thisCondition, firstName) || checkStringIsIn(thisCondition, lastName) || checkStringIsIn(thisCondition, phoneNumber) || checkStringIsIn(thisCondition, emailAddress) || checkStringIsIn(thisCondition, group)){
+                gtk_list_box_append(GTK_LIST_BOX(listBox), GTK_WIDGET(uwuContactButtonArray[i].button));
+                break;
+            }
+            temp = temp -> next;
         }
     }
 }

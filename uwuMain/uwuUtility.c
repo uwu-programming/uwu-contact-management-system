@@ -30,7 +30,6 @@ boolean checkStringIsIn(string x, string y){
             j = 0;
         }
     }
-
     return (j == sizeX ? uwuTrue : uwuFalse);
 }
 
