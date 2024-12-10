@@ -78,9 +78,6 @@ void startContactsUI(GObject *uwuWindow){
     gtk_widget_set_valign(GTK_WIDGET(uwuContactListBox), GTK_ALIGN_FILL);
     gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(uwuFrameScrollWindow), 450);
 
-    // gtets
-    readContactFromFile("contacts/uwuSunshine.csv");
-
     // insert the contact button
     createContactButtonArray();
     sortContactAscendingName();
@@ -127,6 +124,8 @@ void createContactButtonArray(){
         emailAddressBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
         groupBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 
+        gtk_box_set_homogeneous(GTK_BOX(buttonBox), TRUE);
+
         firstNameLabel = malloc(sizeof(GtkWidget));
         lastNameLabel = malloc(sizeof(GtkWidget));
         phoneNumberLabel = malloc(sizeof(GtkWidget));
@@ -136,7 +135,7 @@ void createContactButtonArray(){
         lastNameLabel = gtk_label_new(temp->contact->lastName);
         phoneNumberLabel = gtk_label_new(temp->contact->phoneNumber);
         emailAddressLabel = gtk_label_new(temp->contact->emailAddress);
-        groupLabel = gtk_label_new(temp->contact->address);
+        groupLabel = gtk_label_new(temp->contact->group);
         
         gtk_box_append(GTK_BOX(firstNameBox), GTK_WIDGET(firstNameLabel));
         gtk_box_append(GTK_BOX(lastNameBox), GTK_WIDGET(lastNameLabel));
