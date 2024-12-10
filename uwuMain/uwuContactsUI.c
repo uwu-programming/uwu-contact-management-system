@@ -66,6 +66,7 @@ void startContactsUI(GObject *uwuWindow){
     gtk_widget_set_halign(GTK_WIDGET(uwuSearchEntry), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(uwuSearchEntry), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(uwuSearchEntry), 450, 50);
+    g_signal_connect(uwuSearchEntry, "changed", G_CALLBACK(searchForContact), uwuContactListBox);
 
     // modify setting field
     gtk_widget_set_size_request(GTK_WIDGET(uwuFieldSetting), 300, 0);
@@ -89,6 +90,7 @@ void startContactsUI(GObject *uwuWindow){
     gtk_widget_add_css_class(GTK_WIDGET(uwuFieldSearch), "uwus");
 }
 
+/*---------------------------------------------------------------*/
 void getCurrentUserLabel(string storeTo){
     index i = 0, j = 0;
     string decoration = "Current user: ";
@@ -101,6 +103,17 @@ void getCurrentUserLabel(string storeTo){
     storeTo[i] = '\0';
 }
 
+/*---------------------------------------------------------------*/
+// filter the contact display based on search
+void searchForContact(GObject *uwuSearchEntry, GObject *listBox){
+    string input = gtk_editable_get_chars(GTK_EDITABLE(uwuSearchEntry), 0, -1);
+    removeButtonFromWindow(listBox);
+    createContactButtonArray();
+    sortContactAscendingName();
+    assembleButtonToWindowWithCondition(input, listBox);
+}
+
+/*---------------------------------------------------------------*/
 void createContactButtonArray(){
     free(uwuContactButtonArray); // free the previous address
     uwuContactButtonArray = malloc(sizeof(struct UwUContactButton) * UwUContactNodeCount); // allocate memory for array
@@ -166,7 +179,24 @@ void removeButtonFromWindow(GObject *listbox){
 // function to put all button in array to the scroll window
 void assembleButtonToWindow(GObject *listBox){
     for (index i = 0; i < UwUContactNodeCount; i++){
-        gtk_list_box_prepend(GTK_LIST_BOX(listBox), GTK_WIDGET(uwuContactButtonArray[i].button));
+        gtk_list_box_append(GTK_LIST_BOX(listBox), GTK_WIDGET(uwuContactButtonArray[i].button));
+    }
+}
+
+// function to put button in array to the scroll window if a keyword is met
+void assembleButtonToWindowWithCondition(string condition, GObject *listBox){
+    string firstName, lastName, phoneNumber, emailAddress, group;
+
+    for (index i = 0; i < UwUContactNodeCount; i++){
+        firstName = uwuContactButtonArray[i].contact->firstName;
+        lastName = uwuContactButtonArray[i].contact->lastName;
+        phoneNumber = uwuContactButtonArray[i].contact->phoneNumber;
+        emailAddress = uwuContactButtonArray[i].contact->emailAddress;
+        group = uwuContactButtonArray[i].contact->group;
+
+        if (checkStringIsIn(condition, firstName) || checkStringIsIn(condition, lastName) || checkStringIsIn(condition, phoneNumber) || checkStringIsIn(condition, emailAddress) || checkStringIsIn(condition, group)){
+            gtk_list_box_append(GTK_LIST_BOX(listBox), GTK_WIDGET(uwuContactButtonArray[i].button));
+        }
     }
 }
 
@@ -175,7 +205,7 @@ void sortContactAscendingName(){
     struct UwUContactButton hold;
     for (index i = 0; i < UwUContactNodeCount - 1; i++){
         for (index j = 0; j < UwUContactNodeCount - i - 1; j++){
-            if (strcmp(uwuContactButtonArray[j].contact->firstName, uwuContactButtonArray[j+1].contact->firstName) <= 0){
+            if (strcmp(uwuContactButtonArray[j].contact->firstName, uwuContactButtonArray[j+1].contact->firstName) >= 0){
                 hold.contact = uwuContactButtonArray[j].contact;
                 hold.button = uwuContactButtonArray[j].button;
                 uwuContactButtonArray[j] = uwuContactButtonArray[j+1];

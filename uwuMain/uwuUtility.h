@@ -28,4 +28,10 @@ enum UwUBoolean{
 // check if char x == char y
 boolean checkCharEqual(char x, char y);
 
+// check if string x is in string y
+boolean checkStringIsIn(string x, string y);
+
+// check size of a string
+int sizeOfString(string x);
+
 #endif // else, do nothing
