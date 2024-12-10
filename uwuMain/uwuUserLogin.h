@@ -16,22 +16,19 @@
 // constant path to users.csv
 #define USERS_CSV "users.csv"
 
-// maximum character store
-#define MAX_CHAR_LENGTH 1024
-
 // global variables
-static FILE *uwuUserLoginFile; // FILE pointer to point to users.csv
-static string CURRENT_USER;
+extern FILE *uwuUserLoginFile; // FILE pointer to point to users.csv
+extern string CURRENT_USER;
 
 // structure to store username and correspond password
 struct UwUUserLoginDetail{
-    char username[MAX_CHAR_LENGTH];
-    char password[MAX_CHAR_LENGTH];
+    uwuName username;
+    uwuPassword password;
 };
 
 /*---------------------------------------------------------------*/
 // linked list for userLoginDetail
-static int UwUUserNodeCount = 0; // keep track of number of node
+extern int UwUUserNodeCount; // keep track of number of node
 
 // node
 struct UwUUserNode{
@@ -40,13 +37,13 @@ struct UwUUserNode{
 };
 
 // head
-static struct UwUUserNode *uwuUserHeadNode = NULL;
+extern struct UwUUserNode *uwuUserHeadNode;
 
 // create a new user node
-struct UwUUserNode* createNewUserNode(string username, string password);
+static struct UwUUserNode* createNewUserNode(string username, string password);
 
 // insert new node into user linked list
-void userAddNode(string username, string password);
+static void userAddNode(string username, string password);
 
 /*---------------------------------------------------------------*/
 // read all the users from the users.csv and store them into a linked list

@@ -3,10 +3,42 @@
 <interface>
     <object id = "uwuWindowBox" class = "GtkBox">
         <child>
-            <object id = "uwuFieldTop" class = "GtkBox"></object>
+            <object id = "uwuFieldTop" class = "GtkBox">
+                <!-- profile field -->
+                <child>
+                    <object id = "uwuFieldProfile" class = "GtkBox">
+                        <child><object id = "uwuProfileLabel" class = "GtkLabel"></object></child>
+                    </object>
+                </child>
+                <!-- search field -->
+                <child>
+                    <object id = "uwuFieldSearch" class = "GtkBox">
+                        <child><object id = "uwuSearchEntry" class = "GtkSearchEntry"></object></child>
+                    </object>
+                </child>
+                <!-- setting field -->
+                <child>
+                    <object id = "uwuFieldSetting" class = "GtkBox">
+
+                    </object>
+                </child>
+            </object>
         </child>
         <child>
-            <object id = "uwuFieldBottom" class = "GtkBox"></object>
+            <object id = "uwuFieldBottom" class = "GtkBox">
+                <child>
+                    <object id = "uwuFrameFieldBottom" class = 'GtkFrame'>
+                        <child>
+                            <object id = "uwuFrameScrollWindow" class = "GtkScrolledWindow">
+                                <child>
+                                    <object id = "uwuContactListBox" class = "GtkListBox">
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
         </child>
     </object>
 </interface>

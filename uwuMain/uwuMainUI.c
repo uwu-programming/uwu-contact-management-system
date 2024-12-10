@@ -1,6 +1,8 @@
 #include "uwuMainUI.h"
 #include "uwuUserLogin.h"
 #include "uwuUtility.h"
+#include "uwuContactsUI.h"
+#include "uwuUserContact.h"
 
 // main function: creating the root of application (GtkApplication object)
 int createGTKAPP(int argc, char *argv[]){
@@ -17,7 +19,7 @@ int createGTKAPP(int argc, char *argv[]){
     return status; // return program status to console
 }
 
-// function to create the main window and widgets
+// function to create the login window and widgets
 static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // define variables
     GtkBuilder *uwuBuilder = NULL; // GtkBuilder pointer
@@ -37,7 +39,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     uwuBuilder = gtk_builder_new();
     gtk_builder_add_from_file(uwuBuilder, "uwuMainUI.ui", NULL); // add the main ui GtkBuilder.ui file into the object
 
-    // connect the created widget to GtkBuilder object
+    // connect the created widget from GtkBuilder
     // create the window widget
     uwuWindow = gtk_builder_get_object(uwuBuilder, "uwuWindow");
     gtk_window_set_application(GTK_WINDOW(uwuWindow), uwuApp); // bind the window to GtkApplication
@@ -47,7 +49,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
 
     // link the css file
     uwuCssSource = gtk_css_provider_new();
-    gtk_css_provider_load_from_path(uwuCssSource, "uwuMainUI.css");
+    gtk_css_provider_load_from_path(uwuCssSource, "uwuUI.css");
     gtk_style_context_add_provider_for_display(gdk_display_get_default(), GTK_STYLE_PROVIDER(uwuCssSource), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     // get the window box widget
@@ -119,7 +121,6 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_widget_set_halign(GTK_WIDGET(uwuEntryName), GTK_ALIGN_END);
     gtk_widget_set_size_request(GTK_WIDGET(uwuLabelName), 0, 60);
     gtk_widget_set_size_request(GTK_WIDGET(uwuEntryName), 380, 60);
-    g_signal_connect(uwuEntryName, "changed", G_CALLBACK(uwuDebug), NULL);
 
     // link the label and entry field for password from uwuMainUI to here
     uwuLabelPassword = gtk_builder_get_object(uwuBuilder, "uwuLabelPassword");
@@ -173,14 +174,9 @@ static void loginFunction(GtkButton *uwuButton, GObject *uwuWindow){
     username = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryUsername), 0, -1);
     password = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryPassword), 0, -1);
 
-    if (checkEligibleLogin(username, password) == uwuTrue){
-        GtkBuilder *uwuBuilder = gtk_builder_new_from_file("uwuContactsUI.ui");
-        gtk_window_set_child(GTK_WINDOW(uwuWindow), GTK_WIDGET(gtk_builder_get_object(uwuBuilder, "uwuWindowBox")));
+    // login and create the contact screen if username and password are right
+    if (checkEligibleLogin(username, password) == uwuTrue){  
+        readContactFromFile(CURRENT_USER);      
+        startContactsUI(uwuWindow);
     }
-}
-
-/*---------------------------------------------------------------*/
-// test function for debug use
-static void uwuDebug(){
-    printf("uwu\n");
 }

@@ -1,7 +1,13 @@
 #include "uwuUserLogin.h"
 
+// declare value for extern
+int UwUUserNodeCount = 0;
+FILE *uwuUserLoginFile = NULL;
+string CURRENT_USER = NULL;
+struct UwUUserNode *uwuUserHeadNode = NULL;
+
 // function to create a new user node
-struct UwUUserNode* createNewUserNode(string username, string password){
+static struct UwUUserNode* createNewUserNode(string username, string password){
     struct UwUUserNode *uwuNewNode = (struct UwUUserNode*)malloc(sizeof(struct UwUUserNode)); // point to newly created node
     struct UwUUserLoginDetail *uwuNewUser = (struct UwUUserLoginDetail*)malloc(sizeof(struct UwUUserLoginDetail)); // new struct for storing the username and password
     
@@ -22,7 +28,7 @@ struct UwUUserNode* createNewUserNode(string username, string password){
 }
 
 // function to insert a new user node (in front)
-void userAddNode(string username, string password){
+static void userAddNode(string username, string password){
     struct UwUUserNode *uwuNewNode = createNewUserNode(username, password); // create a new node
     uwuNewNode -> next = uwuUserHeadNode; // makes the new node's next points to address of head
     uwuUserHeadNode = uwuNewNode; // makes the new node the head
@@ -67,14 +73,11 @@ boolean checkEligibleLogin(string username, string password){
         // iterate and compare password
         for (index passwordi = 0; (password[passwordi] != '\0' || nodePassword[passwordi] != '\0') && correctPassword; passwordi++)
             correctPassword = checkCharEqual(password[passwordi], nodePassword[passwordi]);
-
         // check if username and password match any of the one in linked list
         validLogin = (correctUsername == uwuTrue && correctPassword == uwuTrue ? uwuTrue : uwuFalse);
-        CURRENT_USER = (validLogin ? username : NULL);
-        printf("%s\n", CURRENT_USER);
+        CURRENT_USER = (validLogin ? nodeUsername : NULL);
         tempNode = tempNode -> next; // point to next node
         i++; // increment the loop count
     }
-
     return validLogin;
 }

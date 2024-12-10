@@ -7,23 +7,24 @@
 /*---------------------------------------------------------------*/
 // constant path to the contact folder
 #define PATH_TO_CONTACT_DATA "contacts/"
+#define CONTACT_FILE_EXTENSION ".csv"
 
 // global variables
-static FILE *uwuUserContactFile;
+extern FILE *uwuUserContactFile;
 
 /*---------------------------------------------------------------*/
 // structure to store a user's contact information
 struct UwUContactInformation{
-    uwuName *firstName;
-    uwuName *lastName;
-    uwuPhoneNumber *phoneNumber;
-    uwuEmailAddress *emailAddress;
-    uwuAddress *address;
+    uwuName firstName;
+    uwuName lastName;
+    uwuPhoneNumber phoneNumber;
+    uwuEmailAddress emailAddress;
+    uwuName group;
 };
 
 /*---------------------------------------------------------------*/
 // linked list for userContact
-static int UwUContactNodeCount = 0;
+extern int UwUContactNodeCount;
 
 // node
 struct UwUContactNode{
@@ -32,13 +33,13 @@ struct UwUContactNode{
 };
 
 // head
-static struct UwUContactNode *uwuContactHeadNode = NULL;
+extern struct UwUContactNode *uwuContactHeadNode;
 
 // create a new contact node
-struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address);
+static struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group);
 
 // insert new node into contact linked list
-void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address);
+static void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group);
 
 /*---------------------------------------------------------------*/
 // read all the contacts from [username].csv and store them into a linked list

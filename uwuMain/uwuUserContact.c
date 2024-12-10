@@ -1,16 +1,32 @@
 #include "uwuUserContact.h"
 #include "uwuUtility.h"
 
+// declare value for extern
+int UwUContactNodeCount = 0;
+FILE *uwuUserContactFile = NULL;
+struct UwUContactNode *uwuContactHeadNode = NULL;
+
 // function to create a new contact node
-struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address){
+static struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group){
     struct UwUContactNode *uwuNewNode = (struct UwUContactNode*)malloc(sizeof(struct UwUContactNode));
     struct UwUContactInformation *uwuNewContact = (struct UwUContactInformation*)malloc(sizeof(struct UwUContactInformation));
 
-    uwuNewContact -> firstName = (uwuName*)firstName;
-    uwuNewContact -> lastName = (uwuName*)lastName;
-    uwuNewContact -> phoneNumber = (uwuPhoneNumber*)phoneNumber;
-    uwuNewContact -> emailAddress = (uwuEmailAddress*)emailAddress;
-    uwuNewContact -> address = (uwuAddress*)address;
+    index i = 0, j = 0, k = 0, l = 0, m = 0;
+    for (; firstName[i] != '\0'; i++)
+        uwuNewContact -> firstName[i] = firstName[i];
+    uwuNewContact -> firstName[i] = '\0';
+    for (; lastName[j] != '\0'; j++)
+        uwuNewContact -> lastName[j] = lastName[j];
+    uwuNewContact -> lastName[j] = '\0';
+    for (; phoneNumber[k] != '\0'; k++)
+        uwuNewContact -> phoneNumber[k] = phoneNumber[k];
+    uwuNewContact -> phoneNumber[k] = '\0';
+    for (; emailAddress[l] != '\0'; l++)
+        uwuNewContact -> emailAddress[l] = emailAddress[l];
+    uwuNewContact -> emailAddress[l] = '\0';
+    for (; group[m] != '\0'; m++)
+        uwuNewContact -> group[m] = group[m];
+    uwuNewContact -> group[m] = '\0';
 
     uwuNewNode -> contact = uwuNewContact;
 
@@ -18,42 +34,45 @@ struct UwUContactNode* createNewContactNode(string firstName, string lastName, s
 }
 
 // function to insert a new contact node
-void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string address){
-    struct UwUContactNode *uwuNewNode = createNewContactNode(firstName, lastName, phoneNumber, emailAddress, address);
+static void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group){
+    struct UwUContactNode *uwuNewNode = createNewContactNode(firstName, lastName, phoneNumber, emailAddress, group);
     uwuNewNode -> next = uwuContactHeadNode;
     uwuContactHeadNode = uwuNewNode;
     UwUContactNodeCount++;
 }
 
 // read and store all contact from the file
-void readContactFromFile(string filePath){
+void readContactFromFile(string username){
+    filePath path;
+    index i = 0, j = 0, k = 0;
+    for (; PATH_TO_CONTACT_DATA[i] != '\0'; i++)
+        path[i] = PATH_TO_CONTACT_DATA[i];
+    for (; username[j] != '\0'; j++)
+        path[i++] = username[j];
+    for (; CONTACT_FILE_EXTENSION[k] != '\0'; k++)
+        path[i++] = CONTACT_FILE_EXTENSION[k];
+    path[i] = '\0';
+
     // variables to store the read value
-    uwuName *firstName, *lastName;
-    uwuPhoneNumber *phoneNumber;
-    uwuEmailAddress *emailAddress;
-    uwuAddress *address;
+    uwuName firstName, lastName;
+    uwuPhoneNumber phoneNumber;
+    uwuEmailAddress emailAddress;
+    uwuName group;
 
     boolean continueReading = uwuTrue; // check if it is EOF
 
-    uwuUserContactFile = fopen(filePath, READ);
+    uwuUserContactFile = fopen(path, READ);
     if (uwuUserContactFile != NULL){
         while(continueReading){
-            // allocate new address for the string
-            firstName = malloc(sizeof(firstName));
-            lastName = malloc(sizeof(lastName));
-            phoneNumber = malloc(sizeof(phoneNumber));
-            emailAddress = malloc(sizeof(emailAddress));
-            address = malloc(sizeof(address));
-
             // read a specific field
-            continueReading = uwuReadContactField(*firstName);
-            continueReading = uwuReadContactField(*lastName);
-            continueReading = uwuReadContactField(*phoneNumber);
-            continueReading = uwuReadContactField(*emailAddress);
-            continueReading = uwuReadContactField(*address);
+            continueReading = uwuReadContactField(firstName);
+            continueReading = uwuReadContactField(lastName);
+            continueReading = uwuReadContactField(phoneNumber);
+            continueReading = uwuReadContactField(emailAddress);
+            continueReading = uwuReadContactField(group);
 
             // create a node and insert it to linked list
-            contactAddNode(*firstName, *lastName, *phoneNumber, *emailAddress, *address);
+            contactAddNode(firstName, lastName, phoneNumber, emailAddress, group);
         }
     }
 }
@@ -78,6 +97,9 @@ boolean uwuReadContactField(string storeTo){
     return uwuTrue;
 }
 
+
+
+/*
 int main(){
     index i = 0;
     //uwuUserContactFile = fopen("contacts/uwuSunshine.csv", READ);
@@ -88,4 +110,6 @@ int main(){
         i++;
         temp = temp -> next;
     }
+    printf("aaa");
 }
+*/
