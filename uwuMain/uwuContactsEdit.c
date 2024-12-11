@@ -251,26 +251,29 @@ void functionButtonSave(GtkWidget *thiButton, struct UwUContactInformation *curr
 
     }
     if (phoneNumberError != NO_ERROR){
-        allCorrect = uwuFalse;
         if (phoneNumberError == DUPLICATE_ERROR){
             gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Phone number already exist, please try again");
+            allCorrect = uwuFalse;
         } else if (phoneNumberError == FORMAT_ERROR){
             gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Incorrect phone number format, please try again");
+            allCorrect = uwuFalse; 
         }
         gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryPhoneNumber), "uwuEditEntryWrong");
     }
     if (emailAddressError != NO_ERROR){
-        allCorrect = uwuFalse;
         if (emailAddressError == DUPLICATE_ERROR){
             gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Email address already exist, please try again");
+            allCorrect = uwuFalse;
         } else if (emailAddressError == FORMAT_ERROR){
             gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Incorrect email address format, please try again");
+            allCorrect = uwuFalse;
         }
         gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryEmailAddress), "uwuEditEntryWrong");
     }
     if (phoneNumberError == EMPTY_ERROR && emailAddressError == EMPTY_ERROR){
         gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Phone number or email address need to be filled");
         gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Phone number or email address need to be filled");
+        allCorrect = uwuFalse;
     }
     if (groupError != NO_ERROR){
         allCorrect = uwuFalse;
@@ -365,7 +368,7 @@ entryError isPhoneNumber(uwuPhoneNumber phoneNumber, uwuReference reference){
 
     struct UwUContactNode *temp = uwuContactHeadNode;
     for (index i = 0; i < UwUContactNodeCount; i++){
-        if (strcmp(phoneNumber, temp->contact->phoneNumber) == 0 )
+        if (strcmp(phoneNumber, temp->contact->phoneNumber) == 0 && temp->contact->referenceNumber != reference)
             return DUPLICATE_ERROR;
         temp = temp->next;
     }
@@ -431,7 +434,7 @@ entryError isEmailAddress(uwuEmailAddress emailAddress, uwuReference reference){
 
     struct UwUContactNode *temp = uwuContactHeadNode;
     for (index i = 0; i < UwUContactNodeCount; i++){
-        if (strcmp(emailAddress, temp->contact->emailAddress) == 0 )
+        if (strcmp(emailAddress, temp->contact->emailAddress) == 0 && temp->contact->referenceNumber != reference)
             return DUPLICATE_ERROR;
         temp = temp->next;
     }
