@@ -1,3 +1,5 @@
+/*---------------------------------------------------------------*/
+/* css edit for main ui */
 .uwuTopTitle{
     background-image: none;
     color: #e00f82;
@@ -19,24 +21,27 @@
     font-size: 30px;
 }
 
+.uwuMainPageButton{
+    color: white;
+    background-image: none;
+    background-color: #E11584;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: monospace;
+}
+.uwuMainPageButton:hover{
+    color: EF4FA6;
+}
+
+/*---------------------------------------------------------------*/
+/* css edit for contact ui */
 .uwuContactFieldTop{
     background-color: #ffb6c1;
 }
 
 .uwuContactFieldBottom{
     background-color:#fdb3da;
-}
-
-.uwup{
-    background-color: pink;
-}
-
-.uwusf{
-    background-color: #FFb6c1;
-}
-
-.uwus{
-    background-color: #FFE4E1;
 }
 
 /*---------------------------------------------------------------*/

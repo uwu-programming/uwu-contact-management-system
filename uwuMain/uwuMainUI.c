@@ -73,7 +73,6 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     uwuFieldEntryPassword = gtk_builder_get_object(uwuBuilder, "uwuFieldEntryPassword");
 
     // modify top field
-    gtk_widget_add_css_class(GTK_WIDGET(uwuFieldTop), "top");
     gtk_widget_set_valign(GTK_WIDGET(uwuFieldTop), GTK_ALIGN_CENTER);
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldTop), GTK_ALIGN_CENTER);
     gtk_box_set_homogeneous(GTK_BOX(uwuFieldTop), TRUE);
@@ -90,7 +89,6 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldMiddle), GTK_ORIENTATION_VERTICAL);
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for horizontal
     gtk_widget_set_valign(GTK_WIDGET(uwuFieldMiddle), GTK_ALIGN_CENTER); // align center for vertical
-    gtk_widget_add_css_class(GTK_WIDGET(uwuFieldMiddle), "uwutest2");
     gtk_widget_set_size_request(GTK_WIDGET(uwuFieldMiddle), 900, 200);
     gtk_box_set_homogeneous(GTK_BOX(uwuFieldMiddle), TRUE);
 
@@ -103,8 +101,6 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     gtk_widget_set_valign(GTK_WIDGET(uwuFieldPassword), GTK_ALIGN_CENTER);
 
     // modify label and entry field of name and password
-    gtk_widget_add_css_class(GTK_WIDGET(uwuFieldEntryName), "uwutest");
-    gtk_widget_add_css_class(GTK_WIDGET(uwuFieldEntryPassword), "uwutest");
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldLabelName), GTK_ORIENTATION_VERTICAL);
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldLabelPassword), GTK_ORIENTATION_VERTICAL);
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldEntryName), GTK_ORIENTATION_VERTICAL);
@@ -141,7 +137,6 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     UwUEntries.uwuEntryPassword = GTK_PASSWORD_ENTRY(uwuEntryPassword);
 
     // modify bottom field
-    gtk_widget_add_css_class(GTK_WIDGET(uwuFieldBottom), "bot");
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_HORIZONTAL);
     gtk_box_set_homogeneous(GTK_BOX(uwuFieldBottom), TRUE);
     gtk_widget_set_valign(GTK_WIDGET(uwuFieldBottom), GTK_ALIGN_CENTER);
