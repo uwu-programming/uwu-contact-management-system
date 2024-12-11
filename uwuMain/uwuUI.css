@@ -53,6 +53,17 @@
 
 /*---------------------------------------------------------------*/
 /* css for edit ui */
+.uwuCurrentUserLabel{
+    font-size: 25px;
+    font-family: monospace;
+    font-weight: bolder;
+    margin: 8px;
+}
+
+.uwuFrame{
+    margin: 5px;
+}
+
 .uwuEditTitleTop{
     color: #e00f82;
     font-size: 50px;

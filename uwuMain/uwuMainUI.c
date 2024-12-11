@@ -34,8 +34,8 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     GObject *uwuFieldLabelName = NULL, *uwuFieldEntryName = NULL, *uwuFieldLabelPassword = NULL, *uwuFieldEntryPassword = NULL;
     GObject *uwuLabelName = NULL, *uwuEntryName = NULL; // pointer for name's label and text field widget
     GObject *uwuLabelPassword = NULL, *uwuEntryPassword = NULL; // pointer for password's label and text field widget
-    GObject *uwuFieldButtonLogin = NULL, *uwuFieldButtonSignup = NULL; // pointer to the login and signup button field
-    GObject *uwuButtonLogin = NULL, *uwuButtonSignup = NULL; // pointer for login and signup button
+    GObject *uwuFieldButtonLogin = NULL; // pointer to the login and signup button field
+    GObject *uwuButtonLogin = NULL; // pointer for login and signup button
     GObject *uwuInputUsername = NULL, *uwuInputPassword = NULL;
 
     // create a GtkBuilder object and store it to uwuBuilder
@@ -145,18 +145,13 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
 
     // modify the button field
     uwuFieldButtonLogin = gtk_builder_get_object(uwuBuilder, "uwuFieldButtonLogin");
-    uwuFieldButtonSignup = gtk_builder_get_object(uwuBuilder, "uwuFieldButtonSignup");
     gtk_widget_set_halign(GTK_WIDGET(uwuFieldButtonLogin), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(uwuFieldButtonLogin), GTK_ALIGN_CENTER);
-    gtk_widget_set_halign(GTK_WIDGET(uwuFieldButtonSignup), GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(GTK_WIDGET(uwuFieldButtonSignup), GTK_ALIGN_CENTER);
 
     // modify the buttons
     uwuButtonLogin = gtk_builder_get_object(uwuBuilder, "uwuButtonLogin");
-    uwuButtonSignup = gtk_builder_get_object(uwuBuilder, "uwuButtonSignup");
     g_signal_connect(uwuButtonLogin, "clicked", G_CALLBACK(loginFunction), NULL);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonLogin), 150, 50);
-    gtk_widget_set_size_request(GTK_WIDGET(uwuButtonSignup), 150, 50);
 
     // make window visible
     gtk_widget_set_visible(GTK_WIDGET(uwuWindow), TRUE);
