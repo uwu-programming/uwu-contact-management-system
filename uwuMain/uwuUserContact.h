@@ -42,6 +42,9 @@ static struct UwUContactNode* createNewContactNode(string firstName, string last
 // insert new node into contact linked list
 static void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group);
 
+// function to rewrite a contatc
+void contactRewrite(struct UwUContactInformation *thisNode, string firstName, string lastName, string phoneNumber, string emailAddress, string group);
+
 /*---------------------------------------------------------------*/
 // read all the contacts from [username].csv and store them into a linked list
 void readContactFromFile(string username);

@@ -130,6 +130,11 @@ void startEditUI(uwuReference reference){
     gtk_editable_set_text(GTK_EDITABLE(uwuEntryPhoneNumber), currentContact->phoneNumber);
     gtk_editable_set_text(GTK_EDITABLE(uwuEntryEmailAddress), currentContact->emailAddress);
     gtk_editable_set_text(GTK_EDITABLE(uwuEntryGroup), currentContact->group);
+    gtk_entry_set_max_length(GTK_ENTRY(uwuEntryFirstName), 49);
+    gtk_entry_set_max_length(GTK_ENTRY(uwuEntryLastName), 49);
+    gtk_entry_set_max_length(GTK_ENTRY(uwuEntryPhoneNumber), 49);
+    gtk_entry_set_max_length(GTK_ENTRY(uwuEntryEmailAddress), 320);
+    gtk_entry_set_max_length(GTK_ENTRY(uwuEntryGroup), 49);
     uwuEditEntries.uwuEntryFirstName = uwuEntryFirstName;
     uwuEditEntries.uwuEntryLastName = uwuEntryLastName;
     uwuEditEntries.uwuEntryPhoneNumber = uwuEntryPhoneNumber;
@@ -154,13 +159,13 @@ void startEditUI(uwuReference reference){
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonDelete), 0, 80);
 
     // buttons function
-    g_signal_connect(uwuButtonSave, "clicked", G_CALLBACK(functionButtonSave), NULL);
+    g_signal_connect(uwuButtonSave, "clicked", G_CALLBACK(functionButtonSave), currentContact);
     g_signal_connect(uwuButtonCancel, "clicked", G_CALLBACK(functionButtonCancel), NULL);
 }
 
 /*---------------------------------------------------------------*/
 // the alert UI
-void alertWindowUI(string alertMessage){
+void alertWindowUI(typeOfAlert alert){
     gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), FALSE);
 
     GtkBuilder *uwuBuilder = NULL;
@@ -190,9 +195,19 @@ void alertWindowUI(string alertMessage){
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuWindowBox), GTK_ORIENTATION_VERTICAL);
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_HORIZONTAL);
 
-    gtk_label_set_label(GTK_LABEL(uwuLabelAlert), alertMessage);
+    gtk_label_set_label(GTK_LABEL(uwuLabelAlert), ALERT_MESSAGE[alert]);
     gtk_button_set_label(GTK_BUTTON(uwuConfirmButton), "Yes");
-    gtk_button_set_label(GTK_BUTTON(uwuCancelButton), "No");
+    gtk_button_set_label(GTK_BUTTON(uwuCancelButton), "Naurrrr");
+    
+    if (alert == EDITED){
+        gtk_widget_set_name(GTK_WIDGET(uwuConfirmButton), "uwuEditButtonDelete");
+        gtk_widget_set_name(GTK_WIDGET(uwuCancelButton), "uwuEditButtonSave");
+    }else{
+        gtk_widget_set_name(GTK_WIDGET(uwuConfirmButton), "uwuEditButtonSave");
+        gtk_button_set_label(GTK_BUTTON(uwuConfirmButton), "Pogggg uwu");
+        gtk_box_remove(GTK_BOX(uwuFieldBottom), GTK_WIDGET(uwuCancelButton));
+    }
+
     g_signal_connect(uwuConfirmButton, "clicked", G_CALLBACK(returnUWUTrue), uwuAlertWindow);
     g_signal_connect(uwuCancelButton, "clicked", G_CALLBACK(returnUWUFalse), uwuAlertWindow);
 
@@ -203,7 +218,7 @@ void alertWindowUI(string alertMessage){
 
 /*---------------------------------------------------------------*/
 // buttons function
-void functionButtonSave(){
+void functionButtonSave(GtkWidget *thiButton, struct UwUContactInformation *currentContact){
     string firstName, lastName, phoneNumber, emailAddress, group;
     firstName = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryFirstName), 0, -1);
     lastName = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryLastName), 0, -1);
@@ -212,32 +227,61 @@ void functionButtonSave(){
     group = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryGroup), 0, -1);
 
     boolean allCorrect = uwuTrue;
+    entryError firstNameError, lastNameError, phoneNumberError, emailAddressError, groupError;
 
-    if (!(isName(firstName, FIRST_NAME))){
+    firstNameError = isName(firstName, FIRST_NAME);
+    lastNameError = isName(lastName, LAST_NAME);
+    phoneNumberError = isPhoneNumber(phoneNumber, currentContact->referenceNumber);
+    emailAddressError = isEmailAddress(emailAddress, currentContact->referenceNumber);
+    groupError = isGroupFormat(group);
+
+    if (firstNameError != NO_ERROR){
         allCorrect = uwuFalse;
-        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryFirstName), "Incorrect name format, please try again");
+        if (firstNameError == EMPTY_ERROR){
+            gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryFirstName), "First name cannot be empty, please try again");
+        } else {
+            gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryFirstName), "Incorrect name format, please try again");
+        }
         gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryFirstName), "uwuEditEntryWrong");
     }
-    if (!(isName(lastName, LAST_NAME))){
+    if (lastNameError != NO_ERROR){
         allCorrect = uwuFalse;
         gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryLastName), "Incorrect name format, please try again");
         gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryLastName), "uwuEditEntryWrong");
 
     }
-    if (!(isPhoneNumber(phoneNumber))){
+    if (phoneNumberError != NO_ERROR){
         allCorrect = uwuFalse;
-        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Incorrect phone number format, please try again");
+        if (phoneNumberError == DUPLICATE_ERROR){
+            gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Phone number already exist, please try again");
+        } else if (phoneNumberError == FORMAT_ERROR){
+            gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Incorrect phone number format, please try again");
+        }
         gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryPhoneNumber), "uwuEditEntryWrong");
     }
-    if (!(isEmailAddress(emailAddress))){
+    if (emailAddressError != NO_ERROR){
         allCorrect = uwuFalse;
-        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Incorrect email address format, please try again");
+        if (emailAddressError == DUPLICATE_ERROR){
+            gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Email address already exist, please try again");
+        } else if (emailAddressError == FORMAT_ERROR){
+            gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Incorrect email address format, please try again");
+        }
         gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryEmailAddress), "uwuEditEntryWrong");
     }
-    if (!(isGroupFormat(group))){
+    if (phoneNumberError == EMPTY_ERROR && emailAddressError == EMPTY_ERROR){
+        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Phone number or email address need to be filled");
+        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Phone number or email address need to be filled");
+    }
+    if (groupError != NO_ERROR){
         allCorrect = uwuFalse;
         gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryGroup), "Incorrect group format, please try again");
         gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryGroup), "uwuEditEntryWrong");
+    }
+
+    if (allCorrect){
+        hasEdited = uwuFalse;
+        contactRewrite(currentContact, firstName, lastName, phoneNumber, emailAddress, group);
+        alertWindowUI(SAVED);
     }
 }
 
@@ -245,7 +289,7 @@ void functionButtonCancel(){
     if (!(hasEdited))
         startContactsUI();
     else
-        alertWindowUI("You still have unsave changes,\ndo you want to abandon the changes?");
+        alertWindowUI(EDITED);
 }
 
 /*---------------------------------------------------------------*/
@@ -274,28 +318,31 @@ void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow){
 
 /*---------------------------------------------------------------*/
 // check if the string is name format
-boolean isName(uwuName name, typeOfName firstOrLast){
+entryError isName(uwuName name, typeOfName firstOrLast){
     // remove extra ' '
     stringRemoveExtraSpace(name);
 
     // check if it is empty string
     if (sizeOfString(name) == 0 && firstOrLast == FIRST_NAME)
-        return uwuFalse;
+        return EMPTY_ERROR;
     // check if they are all character
     for (index i = 0; name[i] != '\0'; i++)
         if (!(name[i] >= 'A' && name[i] <= 'Z') && !(name[i] >= 'a' && name[i] <= 'z') && name[i] != ' ')
-            return uwuFalse;
-    return uwuTrue;
+            return FORMAT_ERROR;
+    return NO_ERROR;
 }
 
 // check if the string is phone number format
-boolean isPhoneNumber(uwuPhoneNumber phoneNumber){
+entryError isPhoneNumber(uwuPhoneNumber phoneNumber, uwuReference reference){
     boolean isPhone = uwuFalse;
+
+    if (sizeOfString(phoneNumber) == 0)
+        return EMPTY_ERROR;
 
     // check if string only has numbers
     for (index i = 0; phoneNumber[i] != '\0'; i++)
         if (phoneNumber[i] < '0' || phoneNumber[i] > '9')
-            return uwuFalse;
+            return FORMAT_ERROR;
 
     // check if it follows the malaysia format
     index k = 0;
@@ -315,16 +362,27 @@ boolean isPhoneNumber(uwuPhoneNumber phoneNumber){
         if ((sizeOfString(phoneNumber) - k) != PHONE_FORMAT_LENGTH[i])
             isPhone = uwuFalse;
     }
-    return isPhone;
+
+    struct UwUContactNode *temp = uwuContactHeadNode;
+    for (index i = 0; i < UwUContactNodeCount; i++){
+        if (strcmp(phoneNumber, temp->contact->phoneNumber) == 0 )
+            return DUPLICATE_ERROR;
+        temp = temp->next;
+    }
+
+    return (isPhone ? NO_ERROR : FORMAT_ERROR);
 }
 
 // check if the email is correct
-boolean isEmailAddress(uwuEmailAddress emailAddress){    
+entryError isEmailAddress(uwuEmailAddress emailAddress, uwuReference reference){    
     int specialCharCount = 0;
     int atCount = 0, dotCount = 0;
 
+    if (sizeOfString(emailAddress) == 0)
+        return EMPTY_ERROR;
+
     if (!(isalnum(emailAddress[0])))
-        return uwuFalse;
+        return FORMAT_ERROR;
 
     for (index i = 0; emailAddress[i] != '\0'; i++){
         switch(emailAddress[i]){
@@ -338,17 +396,17 @@ boolean isEmailAddress(uwuEmailAddress emailAddress){
                 break;
             default:
                 if (!(emailAddress[i] >= 'A' && emailAddress[i] <= 'Z') && !(emailAddress[i] >= 'a' && emailAddress[i] <= 'z') && !(emailAddress[i] >= '0' && emailAddress[i] <= '9')){
-                    return uwuFalse;
+                    return FORMAT_ERROR;
                 }
                 break;
         }
         if (atCount > 1){
-            return uwuFalse;
+            return FORMAT_ERROR;
         }
     }
 
     if (dotCount < 1)
-        return uwuFalse;
+        return FORMAT_ERROR;
 
     int *specialCharPosition = malloc(sizeof(int) * specialCharCount);
     
@@ -365,21 +423,28 @@ boolean isEmailAddress(uwuEmailAddress emailAddress){
 
     for (index i = 0; i < specialCharCount-1; i++){
         if (specialCharPosition[i]+1 == specialCharPosition[i+1])
-            return uwuFalse;
+            return FORMAT_ERROR;
     }
 
     if (!(isalnum(emailAddress[sizeOfString(emailAddress)-1])))
-        return uwuFalse;
-    
-    return uwuTrue;
+        return FORMAT_ERROR;
+
+    struct UwUContactNode *temp = uwuContactHeadNode;
+    for (index i = 0; i < UwUContactNodeCount; i++){
+        if (strcmp(emailAddress, temp->contact->emailAddress) == 0 )
+            return DUPLICATE_ERROR;
+        temp = temp->next;
+    }
+
+    return NO_ERROR;
 }
 
 // check if the group enter is valid format
-boolean isGroupFormat(uwuName group){
+entryError isGroupFormat(uwuName group){
     stringRemoveExtraSpace(group);
     for (index i = 0; group[i] != '\0'; i++){
         if (!(isalnum(group[i])))
-            return uwuFalse;
+            return FORMAT_ERROR;
     }
-    return uwuTrue;
+    return NO_ERROR;
 }

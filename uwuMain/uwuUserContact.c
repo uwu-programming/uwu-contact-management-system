@@ -7,7 +7,7 @@ FILE *uwuUserContactFile = NULL;
 struct UwUContactNode *uwuContactHeadNode = NULL;
 
 // function to create a new contact node
-static struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group){
+struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group){
     struct UwUContactNode *uwuNewNode = (struct UwUContactNode*)malloc(sizeof(struct UwUContactNode));
     struct UwUContactInformation *uwuNewContact = (struct UwUContactInformation*)malloc(sizeof(struct UwUContactInformation));
 
@@ -41,6 +41,26 @@ static void contactAddNode(string firstName, string lastName, string phoneNumber
     uwuNewNode -> next = uwuContactHeadNode;
     uwuContactHeadNode = uwuNewNode;
     UwUContactNodeCount++;
+}
+
+// function to rewrite values in a contact
+void contactRewrite(struct UwUContactInformation *thisNode, string firstName, string lastName, string phoneNumber, string emailAddress, string group){
+    index i = 0, j = 0, k = 0, l = 0, m = 0;
+    for (; firstName[i] != '\0'; i++)
+        thisNode -> firstName[i] = firstName[i];
+    thisNode -> firstName[i] = '\0';
+    for (; lastName[j] != '\0'; j++)
+        thisNode -> lastName[j] = lastName[j];
+    thisNode -> lastName[j] = '\0';
+    for (; phoneNumber[k] != '\0'; k++)
+        thisNode -> phoneNumber[k] = phoneNumber[k];
+    thisNode -> phoneNumber[k] = '\0';
+    for (; emailAddress[l] != '\0'; l++)
+        thisNode -> emailAddress[l] = emailAddress[l];
+    thisNode -> emailAddress[l] = '\0';
+    for (; group[m] != '\0'; m++)
+        thisNode -> group[m] = group[m];
+    thisNode -> group[m] = '\0';
 }
 
 // read and store all contact from the file
