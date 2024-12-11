@@ -11,8 +11,8 @@
                 </child>
                 <child>
                     <object id = "uwuFieldBottom" class = "GtkBox">
-                        <child><object id = "uwuConfirmButton" class = "GtkButton"><property name = "css-classes">uwuEditButton</property><property name = "name">uwuEditButtonDelete</property></object></child>
-                        <child><object id = "uwuCancelButton" class = "GtkButton"><property name = "css-classes">uwuEditButton</property><property name = "name">uwuEditButtonSave</property></object></child>
+                        <child><object id = "uwuConfirmButton" class = "GtkButton"><property name = "css-classes">uwuEditButton</property></object></child>
+                        <child><object id = "uwuCancelButton" class = "GtkButton"><property name = "css-classes">uwuEditButton</property></object></child>
                     </object>
                 </child>
             </object>

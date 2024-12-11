@@ -13,6 +13,37 @@
 extern boolean hasEdited;
 
 /*---------------------------------------------------------------*/
+// for easier code understanding, create shortcut to determine first or last name
+typedef int typeOfName;
+
+enum EnumTypeOfName{
+    FIRST_NAME = 0,
+    LAST_NAME = 1
+};
+
+// to determine what type of alert message
+typedef int typeOfAlert;
+enum EnumTypeOfAlert{
+    SAVED = 0,
+    EDITED = 1
+};
+
+static char *ALERT_MESSAGE[] = {
+    "You have sucessfully saved the changes!\nUwU",
+    "You still have unsave changes,\ndo you want to abandon the changes?"
+};
+
+// to determine which error
+typedef int entryError;
+
+enum EnumEntryError{
+    NO_ERROR = 0,
+    EMPTY_ERROR = 1,
+    DUPLICATE_ERROR = 2,
+    FORMAT_ERROR = 3
+};
+
+/*---------------------------------------------------------------*/
 // structure to store the entries
 static struct UwUContactsEditEntries{
     GObject *uwuEntryFirstName;
@@ -27,11 +58,11 @@ static struct UwUContactsEditEntries{
 void startEditUI(uwuReference reference);
 
 // function to create the alert UI
-void alertWindowUI(string alertMessage);
+void alertWindowUI(typeOfAlert alert);
 
 /*---------------------------------------------------------------*/
 // buttons function
-void functionButtonSave();
+void functionButtonSave(GtkWidget *thiButton, struct UwUContactInformation *currentContact);
 
 void functionButtonCancel();
 
@@ -48,15 +79,15 @@ void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow); // return t
 /*---------------------------------------------------------------*/
 // format verification
 // check if it is a valid name
-boolean isName(uwuName name);
+entryError isName(uwuName name, typeOfName firstOrLast);
 
 // check if it is a valid phone number
-boolean isPhoneNumber(uwuPhoneNumber phoneNumber);
+entryError isPhoneNumber(uwuPhoneNumber phoneNumber, uwuReference reference);
 
 // check if it is a valid email address
-boolean isEmailAddress(uwuEmailAddress emailAddress);
+entryError isEmailAddress(uwuEmailAddress emailAddress, uwuReference reference);
 
-// check if the string format is right to be stored
-boolean isFormat(string x);
+// check if it is a valid group format
+entryError isGroupFormat(uwuName group);
 
 #endif

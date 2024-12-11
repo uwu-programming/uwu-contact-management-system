@@ -46,8 +46,8 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
     // create the window widget
     uwuWindow = gtk_builder_get_object(uwuBuilder, "uwuWindow");
     gtk_window_set_application(GTK_WINDOW(uwuWindow), uwuApp); // bind the window to GtkApplication
-    gtk_window_set_default_size(GTK_WINDOW(uwuWindow), 1000, 600); // set the default size
-    gtk_widget_set_size_request(GTK_WIDGET(uwuWindow), 1000, 600); // set minimum size of the window
+    gtk_window_set_default_size(GTK_WINDOW(uwuWindow), 1100, 600); // set the default size
+    gtk_widget_set_size_request(GTK_WIDGET(uwuWindow), 1100, 600); // set minimum size of the window
     gtk_window_set_title(GTK_WINDOW(uwuWindow), "UwU Contact Management System"); // set the window's title
 
     // link the css file
