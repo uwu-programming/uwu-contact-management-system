@@ -65,4 +65,7 @@ boolean isPhoneNumber(uwuPhoneNumber phoneNumber);
 // check if it is a valid email address
 boolean isEmailAddress(uwuEmailAddress emailAddress);
 
+// check if it is a valid group format
+boolean isGroupFormat(uwuName group);
+
 #endif

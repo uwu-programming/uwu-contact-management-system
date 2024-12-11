@@ -69,11 +69,11 @@ void startEditUI(uwuReference reference){
     uwuEntryEmailAddress = gtk_builder_get_object(uwuBuilder, "uwuEntryEmailAddress");
     uwuLabelGroup = gtk_builder_get_object(uwuBuilder, "uwuLabelGroup");
     uwuEntryGroup = gtk_builder_get_object(uwuBuilder, "uwuEntryGroup");
-    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryFirstName), 600, 0);
-    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryLastName), 600, 0);
-    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryPhoneNumber), 600, 0);
-    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryEmailAddress), 600, 0);
-    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryGroup), 600, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryFirstName), 800, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryLastName), 800, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryPhoneNumber), 800, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryEmailAddress), 800, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuEntryGroup), 800, 0);
 
     // link the widget in bottom field
     uwuBottomSpace = gtk_builder_get_object(uwuBuilder, "uwuBottomSpace");
@@ -211,7 +211,34 @@ void functionButtonSave(){
     emailAddress = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), 0, -1);
     group = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryGroup), 0, -1);
 
-    printf("%d??", isEmailAddress(emailAddress));
+    boolean allCorrect = uwuTrue;
+
+    if (!(isName(firstName, FIRST_NAME))){
+        allCorrect = uwuFalse;
+        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryFirstName), "Incorrect name format, please try again");
+        gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryFirstName), "uwuEditEntryWrong");
+    }
+    if (!(isName(lastName, LAST_NAME))){
+        allCorrect = uwuFalse;
+        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryLastName), "Incorrect name format, please try again");
+        gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryLastName), "uwuEditEntryWrong");
+
+    }
+    if (!(isPhoneNumber(phoneNumber))){
+        allCorrect = uwuFalse;
+        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), "Incorrect phone number format, please try again");
+        gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryPhoneNumber), "uwuEditEntryWrong");
+    }
+    if (!(isEmailAddress(emailAddress))){
+        allCorrect = uwuFalse;
+        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), "Incorrect email address format, please try again");
+        gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryEmailAddress), "uwuEditEntryWrong");
+    }
+    if (!(isGroupFormat(group))){
+        allCorrect = uwuFalse;
+        gtk_editable_set_text(GTK_EDITABLE(uwuEditEntries.uwuEntryGroup), "Incorrect group format, please try again");
+        gtk_widget_add_css_class(GTK_WIDGET(uwuEditEntries.uwuEntryGroup), "uwuEditEntryWrong");
+    }
 }
 
 void functionButtonCancel(){
@@ -223,8 +250,11 @@ void functionButtonCancel(){
 
 /*---------------------------------------------------------------*/
 // entries listen
-void entryEdited(){
+void entryEdited(GtkWidget *thisEntry){
     hasEdited = uwuTrue;
+    if (sizeOfString(gtk_editable_get_chars(GTK_EDITABLE(thisEntry), 0, -1)) == 0){
+        gtk_widget_remove_css_class(GTK_WIDGET(thisEntry), "uwuEditEntryWrong");
+    }
 }
 
 /*---------------------------------------------------------------*/
@@ -329,7 +359,6 @@ boolean isEmailAddress(uwuEmailAddress emailAddress){
             case '-':
             case '_':
                 specialCharPosition[j++] = i;
-                printf("pos: %d\n", i);
                 break;
         }
     }
@@ -342,5 +371,15 @@ boolean isEmailAddress(uwuEmailAddress emailAddress){
     if (!(isalnum(emailAddress[sizeOfString(emailAddress)-1])))
         return uwuFalse;
     
+    return uwuTrue;
+}
+
+// check if the group enter is valid format
+boolean isGroupFormat(uwuName group){
+    stringRemoveExtraSpace(group);
+    for (index i = 0; group[i] != '\0'; i++){
+        if (!(isalnum(group[i])))
+            return uwuFalse;
+    }
     return uwuTrue;
 }
