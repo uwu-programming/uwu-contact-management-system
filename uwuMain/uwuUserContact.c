@@ -98,20 +98,3 @@ boolean uwuReadContactField(string storeTo){
     }
     return uwuTrue;
 }
-
-
-
-/*
-int main(){
-    //uwuUserContactFile = fopen("contacts/uwuSunshine.csv", READ);
-    readContactFromFile("contacts/uwuSunshine.csv");
-    index i = 0;
-    struct UwUContactNode *temp = uwuContactHeadNode;
-    while (i < UwUContactNodeCount){
-        printf("%s\n", temp -> contact ->phoneNumber);
-        i++;
-        temp = temp -> next;
-    }
-    printf("aaa");
-}
-*/

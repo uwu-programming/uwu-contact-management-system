@@ -104,7 +104,8 @@
     background-color: #890E0A;
 }
 
-.u{
-    background-image: none;
-    background-color: aqua;
+.uwuAlertLabel{
+    font-size: 35px;
+    font-family: monospace;
+    color: black;
 }

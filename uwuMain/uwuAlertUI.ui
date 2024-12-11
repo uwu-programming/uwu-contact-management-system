@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<interface>
+    <object id = "uwuWindow" class = "GtkWindow">
+        <child>
+            <object id = "uwuWindowBox" class = "GtkBox">
+                <child>
+                    <object id = "uwuFieldTop" class = "GtkBox">
+                        <child><object id = "uwuLabelAlert" class = "GtkLabel"><property name = "css-classes">uwuEditLabel</property></object></child>
+                    </object>
+                </child>
+                <child>
+                    <object id = "uwuFieldBottom" class = "GtkBox">
+                        <child><object id = "uwuConfirmButton" class = "GtkButton"><property name = "css-classes">uwuEditButton</property><property name = "name">uwuEditButtonDelete</property></object></child>
+                        <child><object id = "uwuCancelButton" class = "GtkButton"><property name = "css-classes">uwuEditButton</property><property name = "name">uwuEditButtonSave</property></object></child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>
