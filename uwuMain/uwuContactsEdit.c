@@ -211,7 +211,7 @@ void functionButtonSave(){
     emailAddress = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), 0, -1);
     group = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryGroup), 0, -1);
 
-    printf("%d??", isPhoneNumber(phoneNumber));
+    printf("%d??", isEmailAddress(emailAddress));
 }
 
 void functionButtonCancel(){
@@ -246,14 +246,8 @@ void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow){
 // check if the string is name format
 boolean isName(uwuName name, typeOfName firstOrLast){
     // remove extra ' '
-    for (index i = 0; name[i] != '\0'; i++){
-        if ((name[i] == ' ' && name[i+1] == ' ') || name[0] == ' '){
-            for (index j = i; name[j] != '\0'; j++){
-                name[j] = name[j+1];
-            }
-            i--;
-        }
-    }
+    stringRemoveExtraSpace(name);
+
     // check if it is empty string
     if (sizeOfString(name) == 0 && firstOrLast == FIRST_NAME)
         return uwuFalse;
@@ -295,3 +289,58 @@ boolean isPhoneNumber(uwuPhoneNumber phoneNumber){
 }
 
 // check if the email is correct
+boolean isEmailAddress(uwuEmailAddress emailAddress){    
+    int specialCharCount = 0;
+    int atCount = 0, dotCount = 0;
+
+    if (!(isalnum(emailAddress[0])))
+        return uwuFalse;
+
+    for (index i = 0; emailAddress[i] != '\0'; i++){
+        switch(emailAddress[i]){
+            case '@':
+                atCount++;
+            case '.':
+                dotCount++;
+            case '-':
+            case '_':
+                specialCharCount++;
+                break;
+            default:
+                if (!(emailAddress[i] >= 'A' && emailAddress[i] <= 'Z') && !(emailAddress[i] >= 'a' && emailAddress[i] <= 'z') && !(emailAddress[i] >= '0' && emailAddress[i] <= '9')){
+                    return uwuFalse;
+                }
+                break;
+        }
+        if (atCount > 1){
+            return uwuFalse;
+        }
+    }
+
+    if (dotCount < 1)
+        return uwuFalse;
+
+    int *specialCharPosition = malloc(sizeof(int) * specialCharCount);
+    
+    for (index i = 0, j = 0; emailAddress[i] != '\0'; i++){
+        switch(emailAddress[i]){
+            case '@':
+            case '.':
+            case '-':
+            case '_':
+                specialCharPosition[j++] = i;
+                printf("pos: %d\n", i);
+                break;
+        }
+    }
+
+    for (index i = 0; i < specialCharCount-1; i++){
+        if (specialCharPosition[i]+1 == specialCharPosition[i+1])
+            return uwuFalse;
+    }
+
+    if (!(isalnum(emailAddress[sizeOfString(emailAddress)-1])))
+        return uwuFalse;
+    
+    return uwuTrue;
+}

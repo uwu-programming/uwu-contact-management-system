@@ -1,6 +1,7 @@
 #ifndef __UWUUTILITY_H_INCLUDED__ // preprocessor directive check if this header file is include (ifndef stands for if not define)
 #define __UWUUTILITY_H_INCLUDED__ // if current header file hasn't been included, define it (source: https://cplusplus.com/forum/articles/10627/)
 
+#include <ctype.h>
 #include <string.h>
 
 // constant macro
@@ -44,5 +45,8 @@ boolean checkStringIsIn(string x, string y);
 
 // check size of a string
 int sizeOfString(string x);
+
+// remove the extra space in a string
+void stringRemoveExtraSpace(string x);
 
 #endif // else, do nothing

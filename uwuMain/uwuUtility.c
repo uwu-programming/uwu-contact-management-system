@@ -39,3 +39,15 @@ int sizeOfString(string x){
     for (i = 0; x[i] !='\0'; i++);
     return i;
 }
+
+// remove extra space in a string
+void stringRemoveExtraSpace(string x){
+    for (index i = 0; x[i] != '\0'; i++){
+        if ((x[i] == ' ' && x[i+1] == ' ') || x[0] == ' '){
+            for (index j = i; x[j] != '\0'; j++){
+                x[j] = x[j+1];
+            }
+            i--;
+        }
+    }
+}

@@ -65,7 +65,4 @@ boolean isPhoneNumber(uwuPhoneNumber phoneNumber);
 // check if it is a valid email address
 boolean isEmailAddress(uwuEmailAddress emailAddress);
 
-// check if the string format is right to be stored
-boolean isFormat(string x);
-
 #endif
