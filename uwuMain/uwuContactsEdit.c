@@ -284,15 +284,29 @@ void functionButtonSave(GtkWidget *thiButton, struct UwUContactInformation *curr
     if (allCorrect){
         hasEdited = uwuFalse;
         contactRewrite(currentContact, firstName, lastName, phoneNumber, emailAddress, group);
+        rewriteContactFile();
         alertWindowUI(SAVED);
     }
 }
 
+// cancel button
 void functionButtonCancel(){
     if (!(hasEdited))
         startContactsUI();
     else
         alertWindowUI(EDITED);
+}
+
+/*---------------------------------------------------------------*/
+// rewrite the file after editing
+void rewriteContactFile(){
+    uwuUserContactFile = fopen(path, WRITE);
+    struct UwUContactNode *temp = uwuContactHeadNode;
+    for (index i = 0; i < UwUContactNodeCount; i++){
+        fprintf(uwuUserContactFile, "[%s],[%s],[%s],[%s],[%s]\n", temp->contact->firstName, temp->contact->lastName, temp->contact->phoneNumber, temp->contact->emailAddress, temp->contact->group);
+        temp = temp->next;
+    }
+    fclose(uwuUserContactFile);
 }
 
 /*---------------------------------------------------------------*/
@@ -446,7 +460,7 @@ entryError isEmailAddress(uwuEmailAddress emailAddress, uwuReference reference){
 entryError isGroupFormat(uwuName group){
     stringRemoveExtraSpace(group);
     for (index i = 0; group[i] != '\0'; i++){
-        if (!(isalnum(group[i])))
+        if (!(isalnum(group[i])) && group[i] != ' ' && group[i] != ',')
             return FORMAT_ERROR;
     }
     return NO_ERROR;

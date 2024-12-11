@@ -11,6 +11,7 @@
 
 // global variables
 extern FILE *uwuUserContactFile;
+extern filePath path;
 
 /*---------------------------------------------------------------*/
 // structure to store a user's contact information

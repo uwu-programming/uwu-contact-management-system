@@ -46,6 +46,7 @@ void readUsersFromFile(string filePath){
             userAddNode(username, password); // create a new node of this user data
         }
     }
+    fclose(uwuUserLoginFile);
 }
 
 // function to check if the entered username and password are from an eligible user

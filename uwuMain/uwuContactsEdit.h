@@ -62,11 +62,17 @@ void alertWindowUI(typeOfAlert alert);
 
 /*---------------------------------------------------------------*/
 // buttons function
+// save the edit
 void functionButtonSave(GtkWidget *thiButton, struct UwUContactInformation *currentContact);
 
+// cancel and go back to contacts UI
 void functionButtonCancel();
 
 void functionButtonDelete();
+
+/*---------------------------------------------------------------*/
+// rewrite the file
+void rewriteContactFile();
 
 /*---------------------------------------------------------------*/
 // entries listen

@@ -4,6 +4,7 @@
 // declare value for extern
 int UwUContactNodeCount = 0;
 FILE *uwuUserContactFile = NULL;
+filePath path;
 struct UwUContactNode *uwuContactHeadNode = NULL;
 
 // function to create a new contact node
@@ -65,7 +66,6 @@ void contactRewrite(struct UwUContactInformation *thisNode, string firstName, st
 
 // read and store all contact from the file
 void readContactFromFile(string username){
-    filePath path;
     index i = 0, j = 0, k = 0;
     for (; PATH_TO_CONTACT_DATA[i] != '\0'; i++)
         path[i] = PATH_TO_CONTACT_DATA[i];
@@ -97,13 +97,16 @@ void readContactFromFile(string username){
             contactAddNode(firstName, lastName, phoneNumber, emailAddress, group);
         }
     }
+    fclose(uwuUserContactFile);
 }
 
 // read a specific field from file
 boolean uwuReadContactField(string storeTo){
     index i = 0;
     char hold = ' ';
+    boolean hasScan = uwuFalse;
     while (fscanf(uwuUserContactFile, "%c", &hold) == 1){
+        hasScan = uwuTrue;
         if (hold == ']'){
             storeTo[i] = '\0';
             hold = getc(uwuUserContactFile); // read ',' or '\n'
@@ -116,5 +119,5 @@ boolean uwuReadContactField(string storeTo){
             storeTo[i++] = hold;
         }
     }
-    return uwuTrue;
+    return hasScan;
 }
