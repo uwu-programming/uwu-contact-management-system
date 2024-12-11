@@ -179,8 +179,6 @@ static void loginFunction(GtkButton *uwuButton){
 
     // login and create the contact screen if username and password are right
     if (checkEligibleLogin(username, password) == uwuTrue){
-        // read the contact information of this user
-        readContactFromFile(CURRENT_USER);
         startContactsUI();
     }
 }

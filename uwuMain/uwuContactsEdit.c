@@ -161,11 +161,12 @@ void startEditUI(uwuReference reference){
     // buttons function
     g_signal_connect(uwuButtonSave, "clicked", G_CALLBACK(functionButtonSave), currentContact);
     g_signal_connect(uwuButtonCancel, "clicked", G_CALLBACK(functionButtonCancel), NULL);
+    g_signal_connect(uwuButtonDelete, "clicked", G_CALLBACK(functionButtonDelete), currentContact);
 }
 
 /*---------------------------------------------------------------*/
 // the alert UI
-void alertWindowUI(typeOfAlert alert){
+void alertWindowUI(typeOfAlert alert, struct UwUContactInformation *currentContact){
     gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), FALSE);
 
     GtkBuilder *uwuBuilder = NULL;
@@ -199,7 +200,7 @@ void alertWindowUI(typeOfAlert alert){
     gtk_button_set_label(GTK_BUTTON(uwuConfirmButton), "Yes");
     gtk_button_set_label(GTK_BUTTON(uwuCancelButton), "Naurrrr");
     
-    if (alert == EDITED){
+    if (alert == EDITED || alert == DELETE){
         gtk_widget_set_name(GTK_WIDGET(uwuConfirmButton), "uwuEditButtonDelete");
         gtk_widget_set_name(GTK_WIDGET(uwuCancelButton), "uwuEditButtonSave");
     }else{
@@ -208,7 +209,14 @@ void alertWindowUI(typeOfAlert alert){
         gtk_box_remove(GTK_BOX(uwuFieldBottom), GTK_WIDGET(uwuCancelButton));
     }
 
-    g_signal_connect(uwuConfirmButton, "clicked", G_CALLBACK(returnUWUTrue), uwuAlertWindow);
+    if (alert == DELETE){
+        uwuAlertData.alertWindow = GTK_WIDGET(uwuAlertWindow);
+        uwuAlertData.currentContact = currentContact;
+        g_signal_connect(uwuConfirmButton, "clicked", G_CALLBACK(alertWindowConfirmDelete), &uwuAlertData);
+    }else{
+        g_signal_connect(uwuConfirmButton, "clicked", G_CALLBACK(returnUWUTrue), uwuAlertWindow);
+    }
+
     g_signal_connect(uwuCancelButton, "clicked", G_CALLBACK(returnUWUFalse), uwuAlertWindow);
 
     g_signal_connect(uwuAlertWindow, "close-request", G_CALLBACK(returnUWUFalse), uwuAlertWindow);
@@ -285,7 +293,7 @@ void functionButtonSave(GtkWidget *thiButton, struct UwUContactInformation *curr
         hasEdited = uwuFalse;
         contactRewrite(currentContact, firstName, lastName, phoneNumber, emailAddress, group);
         rewriteContactFile();
-        alertWindowUI(SAVED);
+        alertWindowUI(SAVED, NULL);
     }
 }
 
@@ -294,7 +302,12 @@ void functionButtonCancel(){
     if (!(hasEdited))
         startContactsUI();
     else
-        alertWindowUI(EDITED);
+        alertWindowUI(EDITED, NULL);
+}
+
+// delete button
+void functionButtonDelete(GtkWidget *thisButton, struct UwUContactInformation *currentContact){
+    alertWindowUI(DELETE, currentContact);
 }
 
 /*---------------------------------------------------------------*/
@@ -331,6 +344,15 @@ void returnUWUTrue(GtkButton *thisButton, GObject *uwuAlertWindow){
 void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow){
     gtk_window_destroy(GTK_WINDOW(uwuAlertWindow));
     gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), TRUE);
+}
+
+// confirm delete from alert window
+void alertWindowConfirmDelete(GtkButton *thisButton, struct UwUAlertStruct *uwuAlertData){
+    gtk_window_destroy(GTK_WINDOW(uwuAlertData->alertWindow));
+    contactDelete(uwuAlertData->currentContact->referenceNumber);
+    rewriteContactFile();
+    gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), TRUE);
+    startContactsUI();
 }
 
 /*---------------------------------------------------------------*/
