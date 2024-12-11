@@ -1,8 +1,12 @@
 #include "uwuContactsEdit.h"
 
+boolean hasEdited = uwuFalse;
+
 /*---------------------------------------------------------------*/
 // function to create the edit UI
 void startEditUI(uwuReference reference){
+    hasEdited = uwuFalse;
+
     // get original data from the linked list
     struct UwUContactInformation *currentContact = NULL;
     struct UwUContactNode *temp = uwuContactHeadNode;
@@ -126,6 +130,18 @@ void startEditUI(uwuReference reference){
     gtk_editable_set_text(GTK_EDITABLE(uwuEntryPhoneNumber), currentContact->phoneNumber);
     gtk_editable_set_text(GTK_EDITABLE(uwuEntryEmailAddress), currentContact->emailAddress);
     gtk_editable_set_text(GTK_EDITABLE(uwuEntryGroup), currentContact->group);
+    uwuEditEntries.uwuEntryFirstName = uwuEntryFirstName;
+    uwuEditEntries.uwuEntryLastName = uwuEntryLastName;
+    uwuEditEntries.uwuEntryPhoneNumber = uwuEntryPhoneNumber;
+    uwuEditEntries.uwuEntryEmailAddress = uwuEntryEmailAddress;
+    uwuEditEntries.uwuEntryGroup = uwuEntryGroup;
+
+    // entries function
+    g_signal_connect(uwuEntryFirstName, "changed", entryEdited, NULL);
+    g_signal_connect(uwuEntryLastName, "changed", entryEdited, NULL);
+    g_signal_connect(uwuEntryPhoneNumber, "changed", entryEdited, NULL);
+    g_signal_connect(uwuEntryEmailAddress, "changed", entryEdited, NULL);
+    g_signal_connect(uwuEntryGroup, "changed", entryEdited, NULL);
 
     // modify bottom field
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_HORIZONTAL);
@@ -136,4 +152,29 @@ void startEditUI(uwuReference reference){
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonSave), 0, 80);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonCancel), 0, 80);
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonDelete), 0, 80);
+
+    // buttons function
+    g_signal_connect(uwuButtonCancel, "clicked", G_CALLBACK(functionButtonCancel), NULL);
+}
+
+/*---------------------------------------------------------------*/
+// buttons function
+void functionButtonSave(){
+    string firstName, lastName, phoneNumber, emailAddress, group;
+    firstName = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryFirstName), 0, -1);
+    lastName = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryLastName), 0, -1);
+    phoneNumber = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), 0, -1);
+    emailAddress = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), 0, -1);
+    group = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryGroup), 0, -1);
+}
+
+void functionButtonCancel(){
+    if (!(hasEdited))
+        startContactsUI();
+}
+
+/*---------------------------------------------------------------*/
+// entries listen
+void entryEdited(){
+    hasEdited = uwuTrue;
 }

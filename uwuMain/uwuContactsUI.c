@@ -30,9 +30,6 @@ static void conditionAddNode(string condition, index startFrom){
 /*---------------------------------------------------------------*/
 // function to create the contacts window and widgets
 void startContactsUI(){
-    // read the contact information of this user
-    readContactFromFile(CURRENT_USER); 
-
     // define variables
     GtkBuilder *uwuBuilder = NULL;
     GObject *uwuWindowBox = NULL;

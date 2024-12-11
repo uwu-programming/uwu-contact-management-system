@@ -178,7 +178,9 @@ static void loginFunction(GtkButton *uwuButton){
     password = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryPassword), 0, -1);
 
     // login and create the contact screen if username and password are right
-    if (checkEligibleLogin(username, password) == uwuTrue){     
+    if (checkEligibleLogin(username, password) == uwuTrue){
+        // read the contact information of this user
+        readContactFromFile(CURRENT_USER);
         startContactsUI();
     }
 }
