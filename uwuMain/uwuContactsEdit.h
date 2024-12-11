@@ -26,6 +26,9 @@ static struct UwUContactsEditEntries{
 // function to create the edit UI
 void startEditUI(uwuReference reference);
 
+// function to create the alert UI
+void alertWindowUI(string alertMessage);
+
 /*---------------------------------------------------------------*/
 // buttons function
 void functionButtonSave();
@@ -37,6 +40,10 @@ void functionButtonDelete();
 /*---------------------------------------------------------------*/
 // entries listen
 void entryEdited();
+
+// function for buttons: make the parent window continue listen, and return to certain page
+void returnUWUTrue(GtkButton *thisButton, GObject *uwuAlertWindow); // return to contact UI
+void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow); // return to edit UI
 
 /*---------------------------------------------------------------*/
 // format verification

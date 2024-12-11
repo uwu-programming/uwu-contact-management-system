@@ -158,6 +158,49 @@ void startEditUI(uwuReference reference){
 }
 
 /*---------------------------------------------------------------*/
+// the alert UI
+void alertWindowUI(string alertMessage){
+    gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), FALSE);
+
+    GtkBuilder *uwuBuilder = NULL;
+    GObject *uwuAlertWindow = NULL, *uwuWindowBox = NULL;
+    GObject *uwuFieldTop = NULL, *uwuFieldBottom = NULL;
+    GObject *uwuLabelAlert = NULL;
+    GObject *uwuConfirmButton = NULL, *uwuCancelButton = NULL;
+
+    uwuBuilder = gtk_builder_new_from_file("uwuAlertUI.ui");
+    
+    uwuAlertWindow = gtk_builder_get_object(uwuBuilder, "uwuWindow");
+    uwuWindowBox = gtk_builder_get_object(uwuBuilder, "uwuWindowBox");
+
+    uwuFieldTop = gtk_builder_get_object(uwuBuilder, "uwuFieldTop");
+    uwuFieldBottom = gtk_builder_get_object(uwuBuilder, "uwuFieldBottom");
+
+    uwuLabelAlert = gtk_builder_get_object(uwuBuilder, "uwuLabelAlert");
+    uwuConfirmButton = gtk_builder_get_object(uwuBuilder, "uwuConfirmButton");
+    uwuCancelButton = gtk_builder_get_object(uwuBuilder, "uwuCancelButton");
+
+    gtk_window_set_resizable(GTK_WINDOW(uwuAlertWindow), FALSE);
+    gtk_window_set_default_size(GTK_WINDOW(uwuAlertWindow), 300, 200);
+    gtk_window_set_title(GTK_WINDOW(uwuAlertWindow), "UwU Alert!");
+
+    gtk_widget_set_size_request(GTK_WIDGET(uwuFieldTop), 0, 150);
+    gtk_box_set_homogeneous(GTK_BOX(uwuFieldBottom), TRUE);
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuWindowBox), GTK_ORIENTATION_VERTICAL);
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_HORIZONTAL);
+
+    gtk_label_set_label(GTK_LABEL(uwuLabelAlert), alertMessage);
+    gtk_button_set_label(GTK_BUTTON(uwuConfirmButton), "Yes");
+    gtk_button_set_label(GTK_BUTTON(uwuCancelButton), "No");
+    g_signal_connect(uwuConfirmButton, "clicked", G_CALLBACK(returnUWUTrue), uwuAlertWindow);
+    g_signal_connect(uwuCancelButton, "clicked", G_CALLBACK(returnUWUFalse), uwuAlertWindow);
+
+    g_signal_connect(uwuAlertWindow, "close-request", G_CALLBACK(returnUWUFalse), uwuAlertWindow);
+
+    gtk_window_present(GTK_WINDOW(uwuAlertWindow));
+}
+
+/*---------------------------------------------------------------*/
 // buttons function
 void functionButtonSave(){
     string firstName, lastName, phoneNumber, emailAddress, group;
@@ -171,10 +214,27 @@ void functionButtonSave(){
 void functionButtonCancel(){
     if (!(hasEdited))
         startContactsUI();
+    else
+        alertWindowUI("You still have unsave changes,\ndo you want to abandon the changes?");
 }
 
 /*---------------------------------------------------------------*/
 // entries listen
 void entryEdited(){
     hasEdited = uwuTrue;
+}
+
+/*---------------------------------------------------------------*/
+// function for buttons: make the parent window continue listen, and return to certain page
+// return to contact UI
+void returnUWUTrue(GtkButton *thisButton, GObject *uwuAlertWindow){
+    gtk_window_destroy(GTK_WINDOW(uwuAlertWindow));
+    gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), TRUE);
+    startContactsUI();
+}
+
+// return to edit UI
+void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow){
+    gtk_window_destroy(GTK_WINDOW(uwuAlertWindow));
+    gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), TRUE);
 }
