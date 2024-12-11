@@ -25,12 +25,14 @@ enum EnumTypeOfName{
 typedef int typeOfAlert;
 enum EnumTypeOfAlert{
     SAVED = 0,
-    EDITED = 1
+    EDITED = 1,
+    DELETE = 2
 };
 
 static char *ALERT_MESSAGE[] = {
     "You have sucessfully saved the changes!\nUwU",
-    "You still have unsave changes,\ndo you want to abandon the changes?"
+    "You still have unsave changes,\ndo you want to abandon the changes?",
+    "Are you sure you want to\ndelete this contact?"
 };
 
 // to determine which error
@@ -53,20 +55,33 @@ static struct UwUContactsEditEntries{
     GObject *uwuEntryGroup;
 }uwuEditEntries;
 
+// structure to pass reference to button in alert window
+static struct UwUAlertStruct{
+    GtkWidget *alertWindow;
+    struct UwUContactInformation *currentContact;
+}uwuAlertData;
+
 /*---------------------------------------------------------------*/
 // function to create the edit UI
 void startEditUI(uwuReference reference);
 
 // function to create the alert UI
-void alertWindowUI(typeOfAlert alert);
+void alertWindowUI(typeOfAlert alert, struct UwUContactInformation *currentContact);
 
 /*---------------------------------------------------------------*/
 // buttons function
+// save the edit
 void functionButtonSave(GtkWidget *thiButton, struct UwUContactInformation *currentContact);
 
+// cancel and go back to contacts UI
 void functionButtonCancel();
 
-void functionButtonDelete();
+// delete a specific contact
+void functionButtonDelete(GtkWidget *thisButton, struct UwUContactInformation *currentContact);
+
+/*---------------------------------------------------------------*/
+// rewrite the file
+void rewriteContactFile();
 
 /*---------------------------------------------------------------*/
 // entries listen
@@ -75,6 +90,7 @@ void entryEdited();
 // function for buttons: make the parent window continue listen, and return to certain page
 void returnUWUTrue(GtkButton *thisButton, GObject *uwuAlertWindow); // return to contact UI
 void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow); // return to edit UI
+void alertWindowConfirmDelete(GtkButton *thisButton, struct UwUAlertStruct *uwuAlertData); // confirm to delete a certain contact
 
 /*---------------------------------------------------------------*/
 // format verification

@@ -11,6 +11,7 @@
 
 // global variables
 extern FILE *uwuUserContactFile;
+extern filePath path;
 
 /*---------------------------------------------------------------*/
 // structure to store a user's contact information
@@ -37,10 +38,16 @@ struct UwUContactNode{
 extern struct UwUContactNode *uwuContactHeadNode;
 
 // create a new contact node
-static struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group);
+struct UwUContactNode* createNewContactNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group);
 
 // insert new node into contact linked list
-static void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group);
+void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group);
+
+// function to delete all contacts node
+void contactDeleteAll();
+
+// function to delete a spceific contact
+void contactDelete(uwuReference reference);
 
 // function to rewrite a contatc
 void contactRewrite(struct UwUContactInformation *thisNode, string firstName, string lastName, string phoneNumber, string emailAddress, string group);

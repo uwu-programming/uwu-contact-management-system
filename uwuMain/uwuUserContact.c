@@ -4,6 +4,7 @@
 // declare value for extern
 int UwUContactNodeCount = 0;
 FILE *uwuUserContactFile = NULL;
+filePath path;
 struct UwUContactNode *uwuContactHeadNode = NULL;
 
 // function to create a new contact node
@@ -36,11 +37,44 @@ struct UwUContactNode* createNewContactNode(string firstName, string lastName, s
 }
 
 // function to insert a new contact node
-static void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group){
+void contactAddNode(string firstName, string lastName, string phoneNumber, string emailAddress, string group){
     struct UwUContactNode *uwuNewNode = createNewContactNode(firstName, lastName, phoneNumber, emailAddress, group);
     uwuNewNode -> next = uwuContactHeadNode;
     uwuContactHeadNode = uwuNewNode;
     UwUContactNodeCount++;
+}
+
+// function to delete all contacts node
+void contactDeleteAll(){
+    struct UwUContactNode *temp = uwuContactHeadNode, *temp2;
+    for (index i = 0; i < UwUContactNodeCount - 1; i++){
+        temp2 = temp->next;
+        free(temp);
+        temp = temp2;
+    }
+    free(temp);
+    UwUContactNodeCount = 0;
+    uwuContactHeadNode = NULL;
+}
+
+// delete a specific contact
+void contactDelete(uwuReference reference){
+    struct UwUContactNode *temp = uwuContactHeadNode, *temp2;
+    if (temp->contact->referenceNumber == reference){
+        uwuContactHeadNode = temp->next;
+        free(temp);
+        UwUContactNodeCount--;
+    }else{
+        for (index i = 0; i < UwUContactNodeCount - 1; i++){
+            if (temp->next->contact->referenceNumber == reference){
+                temp2 = temp->next;
+                temp->next = temp2->next;
+                free(temp2);
+                UwUContactNodeCount--;
+            }
+            temp = temp->next;
+        }
+    }
 }
 
 // function to rewrite values in a contact
@@ -65,7 +99,6 @@ void contactRewrite(struct UwUContactInformation *thisNode, string firstName, st
 
 // read and store all contact from the file
 void readContactFromFile(string username){
-    filePath path;
     index i = 0, j = 0, k = 0;
     for (; PATH_TO_CONTACT_DATA[i] != '\0'; i++)
         path[i] = PATH_TO_CONTACT_DATA[i];
@@ -94,16 +127,20 @@ void readContactFromFile(string username){
             continueReading = uwuReadContactField(group);
 
             // create a node and insert it to linked list
-            contactAddNode(firstName, lastName, phoneNumber, emailAddress, group);
+            if (continueReading)
+                contactAddNode(firstName, lastName, phoneNumber, emailAddress, group);
         }
     }
+    fclose(uwuUserContactFile);
 }
 
 // read a specific field from file
 boolean uwuReadContactField(string storeTo){
     index i = 0;
     char hold = ' ';
+    boolean hasScan = uwuFalse;
     while (fscanf(uwuUserContactFile, "%c", &hold) == 1){
+        hasScan = uwuTrue;
         if (hold == ']'){
             storeTo[i] = '\0';
             hold = getc(uwuUserContactFile); // read ',' or '\n'
@@ -116,5 +153,5 @@ boolean uwuReadContactField(string storeTo){
             storeTo[i++] = hold;
         }
     }
-    return uwuTrue;
+    return hasScan;
 }

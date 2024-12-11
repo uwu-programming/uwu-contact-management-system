@@ -100,6 +100,10 @@ void startContactsUI(){
     gtk_widget_set_valign(GTK_WIDGET(uwuContactListBox), GTK_ALIGN_FILL);
     gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(uwuFrameScrollWindow), 450);
 
+    // read the contacts from file
+    contactDeleteAll();
+    readContactFromFile(CURRENT_USER);
+
     // insert the contact button
     createContactButtonArray();
     sortContactAscendingName();
@@ -267,6 +271,5 @@ void sortContactAscendingName(){
 /*---------------------------------------------------------------*/
 // function of the contact button
 void selectContact(GObject *button, uwuReference *reference){
-    printf("%d ", *reference);
     startEditUI(*reference);
 }

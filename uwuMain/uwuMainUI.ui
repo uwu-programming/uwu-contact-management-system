@@ -66,6 +66,7 @@
                                 <child>
                                     <object id = "uwuButtonLogin" class = "GtkButton">
                                         <property name = "label">Log in</property>
+                                        <property name = "css-classes">uwuMainPageButton</property>
                                     </object>
                                 </child>
                             </object>
@@ -75,6 +76,7 @@
                                 <child>
                                     <object id = "uwuButtonSignup" class = "GtkButton">
                                         <property name = "label">Sign up</property>
+                                        <property name = "css-classes">uwuMainPageButton</property>
                                     </object>
                                 </child>
                             </object>
