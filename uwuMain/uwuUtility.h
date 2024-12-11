@@ -11,6 +11,8 @@ typedef char* string;
 typedef int boolean;
 typedef int index;
 
+
+typedef int uwuReference;
 typedef char uwuName[50];
 typedef uwuName uwuPassword;
 typedef char uwuPhoneNumber[13];

@@ -4,8 +4,9 @@
 #include <gtk/gtk.h>
 #include "uwuMainUI.h"
 #include "uwuUserLogin.h"
-#include "uwuUserContact.h"
 #include "uwuUtility.h"
+#include "uwuUserContact.h"
+#include "uwuContactsEdit.h"
 
 /*---------------------------------------------------------------*/
 // struct to store the contact and button reference
@@ -37,7 +38,7 @@ static void conditionAddNode(string condition, index startFrom);
 
 /*---------------------------------------------------------------*/
 // function to create the contacts UI
-void startContactsUI(GObject *uwuWindow);
+void startContactsUI();
 
 // function to get label decoration for profile label
 void getCurrentUserLabel(string storeTo);
@@ -61,5 +62,9 @@ void assembleButtonToWindowWithCondition(string condition, GObject *listBox);
 
 // function to sort name by first name, lexicographical order
 void sortContactAscendingName();
+
+/*---------------------------------------------------------------*/
+// function of the button
+void selectContact(GObject *button, uwuReference *reference);
 
 #endif

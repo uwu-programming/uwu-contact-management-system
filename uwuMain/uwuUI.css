@@ -1,7 +1,7 @@
 .uwuTopTitle{
     background-image: none;
-    color: pink;
-    font-size: 45px;
+    color: #e00f82;
+    font-size: 50px;
     font-weight: bolder;
     font-family: monospace;
 }
@@ -20,11 +20,11 @@
 }
 
 .uwuContactFieldTop{
-    background-color: aquamarine;
+    background-color: #ffb6c1;
 }
 
 .uwuContactFieldBottom{
-    background-color: cyan;
+    background-color:#fdb3da;
 }
 
 .uwup{
@@ -32,9 +32,79 @@
 }
 
 .uwusf{
-    background-color: azure;
+    background-color: #FFb6c1;
 }
 
 .uwus{
-    background-color: crimson;
+    background-color: #FFE4E1;
+}
+
+/*---------------------------------------------------------------*/
+/* css for edit ui */
+.uwuEditTitleTop{
+    color: #e00f82;
+    font-size: 50px;
+    font-weight: bolder;
+    font-family: monospace;
+    margin: 20px;
+}
+
+.uwuEditFrameMid{
+    padding: 15px;
+    margin: 15px;
+}
+
+.uwuEditContentBox{
+    margin: 12px;
+}
+
+.uwuEditLabel{
+    margin: 5px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.uwuEditEntry{
+    font-size: 25px;
+    font-family: monospace;
+}
+
+.uwuEditButton{
+    margin: 15px;
+    color: #FFFFFF;
+    background-image: none;
+    border-radius: 12px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: monospace;
+}
+.uwuEditButton:active{
+    transform: scale(0.8);
+}
+
+#uwuEditButtonSave{
+    background-color: #5DBB63;
+}
+#uwuEditButtonSave:hover{
+    background-color: #3A8B40;
+}
+
+#uwuEditButtonCancel{
+    background-color: #787276;
+}
+#uwuEditButtonCancel:hover{
+    background-color: #504C4F;
+}
+
+#uwuEditButtonDelete{
+    background-color: #D61610;
+}
+#uwuEditButtonDelete:hover{
+    background-color: #890E0A;
+}
+
+.u{
+    background-image: none;
+    background-color: aqua;
 }

@@ -11,7 +11,8 @@
 
 /*---------------------------------------------------------------*/
 // global variables
-static GtkCssProvider *uwuCssSource; // pointer to css file
+extern GtkCssProvider *uwuCssSource; // pointer to css file
+extern GObject *uwuWindow;
 
 // structure to store entry
 static struct UwUEntryStruct{
@@ -28,7 +29,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData);
 
 /*---------------------------------------------------------------*/
 // function for log in button
-static void loginFunction(GtkButton *uwuButton, GObject *uwuWindow);
+static void loginFunction(GtkButton *uwuButton);
 
 /*---------------------------------------------------------------*/
 // uwuDebug
