@@ -42,7 +42,7 @@
 /* css for edit ui */
 .uwuEditTitleTop{
     color: #e00f82;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: bolder;
     font-family: monospace;
     margin: 20px;
@@ -51,4 +51,46 @@
 .uwuEditFrameMid{
     padding: 15px;
     margin: 15px;
+}
+
+.uwuEditContentBox{
+    margin: 12px;
+}
+
+.uwuEditLabel{
+    margin: 5px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.uwuEditButton{
+    margin: 15px;
+    color: #FFFFFF;
+    background-image: none;
+    border-radius: 12px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+#uwuEditButtonSave{
+    background-color: #5DBB63;
+}
+#uwuEditButtonSave:hover{
+    background-color: #3A8B40;
+}
+
+#uwuEditButtonCancel{
+    background-color: #787276;
+}
+#uwuEditButtonCancel:hover{
+    background-color: #504C4F;
+}
+
+#uwuEditButtonDelete{
+    background-color: #D61610;
+}
+#uwuEditButtonDelete:hover{
+    background-color: #890E0A;
 }

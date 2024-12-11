@@ -60,7 +60,7 @@ void startEditUI(uwuReference reference){
     uwuBottomButtonField = gtk_builder_get_object(uwuBuilder, "uwuBottomButtonField");
     uwuButtonSave = gtk_builder_get_object(uwuBuilder, "uwuButtonSave");
     uwuButtonCancel = gtk_builder_get_object(uwuBuilder, "uwuButtonCancel");
-    uwuButtonDelete = gtk_builder_get_object(uwuBuilder, "uwuButtonClose");
+    uwuButtonDelete = gtk_builder_get_object(uwuBuilder, "uwuButtonDelete");
 
     // modify top field
     gtk_label_set_label(GTK_LABEL(uwuTitleTop), "UwU Editing");
@@ -69,5 +69,38 @@ void startEditUI(uwuReference reference){
     // modify middle field
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldMid), GTK_ORIENTATION_VERTICAL);
     gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuBoxMid), GTK_ORIENTATION_VERTICAL);
+    gtk_box_set_homogeneous(GTK_BOX(uwuBoxMid), TRUE);
     gtk_widget_add_css_class(GTK_WIDGET(uwuFrameMid), "uwuEditFrameMid");
+
+    // modify the labels
+    gtk_label_set_label(GTK_LABEL(uwuLabelFirstName), "First name");
+    gtk_label_set_label(GTK_LABEL(uwuLabelLastName), "Last name");
+    gtk_label_set_label(GTK_LABEL(uwuLabelPhoneNumber), "Phone number");
+    gtk_label_set_label(GTK_LABEL(uwuLabelEmailAddress), "Email address");
+    gtk_label_set_label(GTK_LABEL(uwuLabelGroup), "Group(s)");
+    gtk_widget_set_size_request(GTK_WIDGET(uwuLabelFirstName), 260, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuLabelLastName), 260, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuLabelPhoneNumber), 260, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuLabelEmailAddress), 260, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuLabelGroup), 260, 0);
+    gtk_label_set_xalign(GTK_LABEL(uwuLabelFirstName), 0);
+    gtk_label_set_xalign(GTK_LABEL(uwuLabelLastName), 0);
+    gtk_label_set_xalign(GTK_LABEL(uwuLabelPhoneNumber), 0);
+    gtk_label_set_xalign(GTK_LABEL(uwuLabelEmailAddress), 0);
+    gtk_label_set_xalign(GTK_LABEL(uwuLabelGroup), 0);
+    gtk_widget_add_css_class(GTK_WIDGET(uwuLabelFirstName), "uwuEditLabel");
+    gtk_widget_add_css_class(GTK_WIDGET(uwuLabelLastName), "uwuEditLabel");
+    gtk_widget_add_css_class(GTK_WIDGET(uwuLabelPhoneNumber), "uwuEditLabel");
+    gtk_widget_add_css_class(GTK_WIDGET(uwuLabelEmailAddress), "uwuEditLabel");
+    gtk_widget_add_css_class(GTK_WIDGET(uwuLabelGroup), "uwuEditLabel");
+
+    // modify bottom field
+    gtk_orientable_set_orientation(GTK_ORIENTABLE(uwuFieldBottom), GTK_ORIENTATION_HORIZONTAL);
+    gtk_box_set_homogeneous(GTK_BOX(uwuFieldBottom), TRUE);
+    gtk_box_set_homogeneous(GTK_BOX(uwuBottomButtonField), TRUE);
+
+    // modify button
+    gtk_widget_set_size_request(GTK_WIDGET(uwuButtonSave), 0, 80);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuButtonCancel), 0, 80);
+    gtk_widget_set_size_request(GTK_WIDGET(uwuButtonDelete), 0, 80);
 }

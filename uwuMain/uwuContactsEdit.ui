@@ -19,35 +19,45 @@
                                 <!-- field for first name entry -->
                                 <child>
                                     <object id = "uwuFirstNameBox" class = "GtkBox">
+                                        <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelFirstName" class = "GtkLabel"></object></child>
+                                        <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
                                         <child><object id = "uwuEntryFirstName" class = "GtkEntry"></object></child>
                                     </object>
                                 </child>
                                 <!-- field for last name entry -->
                                 <child>
                                     <object id = "uwuLastNameBox" class = "GtkBox">
+                                        <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelLastName" class = "GtkLabel"></object></child>
+                                        <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
                                         <child><object id = "uwuEntryLastName" class = "GtkEntry"></object></child>
                                     </object>
                                 </child>
                                 <!-- field for phone number entry -->
                                 <child>
                                     <object id = "uwuPhoneNumberBox" class = "GtkBox">
+                                        <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelPhoneNumber" class = "GtkLabel"></object></child>
+                                        <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
                                         <child><object id = "uwuEntryPhoneNumber" class = "GtkEntry"></object></child>
                                     </object>
                                 </child>
                                 <!-- field for email address entry -->
                                 <child>
                                     <object id = "uwuEmailAddressBox" class = "GtkBox">
+                                        <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelEmailAddress" class = "GtkLabel"></object></child>
+                                        <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
                                         <child><object id = "uwuEntryEmailAddress" class = "GtkEntry"></object></child>
                                     </object>
                                 </child>
                                 <!-- field for group entry -->
                                 <child>
                                     <object id = "uwuGroupBox" class = "GtkBox">
+                                        <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelGroup" class = "GtkLabel"></object></child>
+                                        <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
                                         <child><object id = "uwuEntryGroup" class = "GtkEntry"></object></child>
                                     </object>
                                 </child>
@@ -63,15 +73,29 @@
             <object id = "uwuFieldBottom" class = "GtkBox">
                 <child>
                     <object id = "uwuBottomSpace" class = "GtkBox"></object>
+                </child>
+                <child>
                     <object id = "uwuBottomButtonField" class = "GtkBox">
                         <child>
-                            <object id = "uwuButtonSave" class = "GtkButton"></object>
+                            <object id = "uwuButtonSave" class = "GtkButton">
+                                <property name = "name">uwuEditButtonSave</property>
+                                <property name = "css-classes">uwuEditButton</property>
+                                <property name = "label">Save</property>
+                            </object>
                         </child>
                         <child>
-                            <object id = "uwuButtonCancel" class = "GtkButton"></object>
+                            <object id = "uwuButtonCancel" class = "GtkButton">
+                                <property name = "name">uwuEditButtonCancel</property>
+                                <property name = "css-classes">uwuEditButton</property>
+                                <property name = "label">Cancel</property>
+                            </object>
                         </child>
                         <child>
-                            <object id = "uwuButtonDelete" class = "GtkButton"></object>
+                            <object id = "uwuButtonDelete" class = "GtkButton">
+                                <property name = "name">uwuEditButtonDelete</property>
+                                <property name = "css-classes">uwuEditButton</property>
+                                <property name = "label">Delete</property>
+                            </object>
                         </child>
                     </object>
                 </child>
