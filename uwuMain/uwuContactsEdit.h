@@ -5,6 +5,8 @@
 
 #include "uwuMainUI.h"
 #include "uwuUtility.h"
+#include "uwuUserContact.h"
+#include "uwuUserLogin.h"
 
 /*---------------------------------------------------------------*/
 // structure to store the entries

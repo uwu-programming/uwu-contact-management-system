@@ -22,7 +22,7 @@
                                         <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelFirstName" class = "GtkLabel"></object></child>
                                         <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
-                                        <child><object id = "uwuEntryFirstName" class = "GtkEntry"></object></child>
+                                        <child><object id = "uwuEntryFirstName" class = "GtkEntry"><property name = "css-classes">uwuEditEntry</property></object></child>
                                     </object>
                                 </child>
                                 <!-- field for last name entry -->
@@ -31,7 +31,7 @@
                                         <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelLastName" class = "GtkLabel"></object></child>
                                         <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
-                                        <child><object id = "uwuEntryLastName" class = "GtkEntry"></object></child>
+                                        <child><object id = "uwuEntryLastName" class = "GtkEntry"><property name = "css-classes">uwuEditEntry</property></object></child>
                                     </object>
                                 </child>
                                 <!-- field for phone number entry -->
@@ -40,7 +40,7 @@
                                         <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelPhoneNumber" class = "GtkLabel"></object></child>
                                         <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
-                                        <child><object id = "uwuEntryPhoneNumber" class = "GtkEntry"></object></child>
+                                        <child><object id = "uwuEntryPhoneNumber" class = "GtkEntry"><property name = "css-classes">uwuEditEntry</property></object></child>
                                     </object>
                                 </child>
                                 <!-- field for email address entry -->
@@ -49,7 +49,7 @@
                                         <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelEmailAddress" class = "GtkLabel"></object></child>
                                         <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
-                                        <child><object id = "uwuEntryEmailAddress" class = "GtkEntry"></object></child>
+                                        <child><object id = "uwuEntryEmailAddress" class = "GtkEntry"><property name = "css-classes">uwuEditEntry</property></object></child>
                                     </object>
                                 </child>
                                 <!-- field for group entry -->
@@ -58,7 +58,7 @@
                                         <property name = "css-classes">uwuEditContentBox</property>
                                         <child><object id = "uwuLabelGroup" class = "GtkLabel"></object></child>
                                         <child><object class = "GtkLabel"><property name = "label">:</property><property name = "css-classes">uwuEditLabel</property></object></child>
-                                        <child><object id = "uwuEntryGroup" class = "GtkEntry"></object></child>
+                                        <child><object id = "uwuEntryGroup" class = "GtkEntry"><property name = "css-classes">uwuEditEntry</property></object></child>
                                     </object>
                                 </child>
                             </object>

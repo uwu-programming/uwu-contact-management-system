@@ -39,6 +39,7 @@
     background-color: #FFE4E1;
 }
 
+/*---------------------------------------------------------------*/
 /* css for edit ui */
 .uwuEditTitleTop{
     color: #e00f82;
@@ -64,6 +65,11 @@
     font-family: monospace;
 }
 
+.uwuEditEntry{
+    font-size: 25px;
+    font-family: monospace;
+}
+
 .uwuEditButton{
     margin: 15px;
     color: #FFFFFF;
@@ -72,6 +78,9 @@
     font-size: 25px;
     font-weight: bold;
     font-family: monospace;
+}
+.uwuEditButton:active{
+    transform: scale(0.8);
 }
 
 #uwuEditButtonSave{
@@ -93,4 +102,9 @@
 }
 #uwuEditButtonDelete:hover{
     background-color: #890E0A;
+}
+
+.u{
+    background-image: none;
+    background-color: aqua;
 }
