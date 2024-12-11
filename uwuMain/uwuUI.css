@@ -84,17 +84,17 @@
 }
 
 #uwuEditButtonSave{
-    background-color: #5DBB63;
+    background-color: #03AC13;
 }
 #uwuEditButtonSave:hover{
-    background-color: #3A8B40;
+    background-color: #02620B;
 }
 
 #uwuEditButtonCancel{
     background-color: #787276;
 }
 #uwuEditButtonCancel:hover{
-    background-color: #504C4F;
+    background-color: #3D3A3C;
 }
 
 #uwuEditButtonDelete{

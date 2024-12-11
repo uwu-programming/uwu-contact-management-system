@@ -6,11 +6,11 @@
 // constant macro
 #define MAX_CHAR_LENGTH 1024
 
+/*---------------------------------------------------------------*/
 // custom typedef for easier access and referencing
 typedef char* string;
 typedef int boolean;
 typedef int index;
-
 
 typedef int uwuReference;
 typedef char uwuName[50];
@@ -22,12 +22,20 @@ typedef char uwuMaxString[MAX_CHAR_LENGTH];
 typedef char uwuLabelString[50+20];
 typedef char filePath[256];
 
+/*---------------------------------------------------------------*/
+// phone format condition
+#define PHONE_FORMAT_NUMBER 5
+static char *PHONE_FORMAT_START[] = {"01", "011", "03", "08", "0"};
+static int PHONE_FORMAT_LENGTH[] = {10, 11, 10, 9, 8};
+
+/*---------------------------------------------------------------*/
 // enumeration for true and false
 enum UwUBoolean{
     uwuTrue = 1,
     uwuFalse = 0
 };
 
+/*---------------------------------------------------------------*/
 // check if char x == char y
 boolean checkCharEqual(char x, char y);
 

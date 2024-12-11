@@ -154,6 +154,7 @@ void startEditUI(uwuReference reference){
     gtk_widget_set_size_request(GTK_WIDGET(uwuButtonDelete), 0, 80);
 
     // buttons function
+    g_signal_connect(uwuButtonSave, "clicked", G_CALLBACK(functionButtonSave), NULL);
     g_signal_connect(uwuButtonCancel, "clicked", G_CALLBACK(functionButtonCancel), NULL);
 }
 
@@ -209,6 +210,8 @@ void functionButtonSave(){
     phoneNumber = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryPhoneNumber), 0, -1);
     emailAddress = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryEmailAddress), 0, -1);
     group = gtk_editable_get_chars(GTK_EDITABLE(uwuEditEntries.uwuEntryGroup), 0, -1);
+
+    printf("%d??", isPhoneNumber(phoneNumber));
 }
 
 void functionButtonCancel(){
@@ -238,3 +241,57 @@ void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow){
     gtk_window_destroy(GTK_WINDOW(uwuAlertWindow));
     gtk_widget_set_sensitive(GTK_WIDGET(uwuWindow), TRUE);
 }
+
+/*---------------------------------------------------------------*/
+// check if the string is name format
+boolean isName(uwuName name, typeOfName firstOrLast){
+    // remove extra ' '
+    for (index i = 0; name[i] != '\0'; i++){
+        if ((name[i] == ' ' && name[i+1] == ' ') || name[0] == ' '){
+            for (index j = i; name[j] != '\0'; j++){
+                name[j] = name[j+1];
+            }
+            i--;
+        }
+    }
+    // check if it is empty string
+    if (sizeOfString(name) == 0 && firstOrLast == FIRST_NAME)
+        return uwuFalse;
+    // check if they are all character
+    for (index i = 0; name[i] != '\0'; i++)
+        if (!(name[i] >= 'A' && name[i] <= 'Z') && !(name[i] >= 'a' && name[i] <= 'z') && name[i] != ' ')
+            return uwuFalse;
+    return uwuTrue;
+}
+
+// check if the string is phone number format
+boolean isPhoneNumber(uwuPhoneNumber phoneNumber){
+    boolean isPhone = uwuFalse;
+
+    // check if string only has numbers
+    for (index i = 0; phoneNumber[i] != '\0'; i++)
+        if (phoneNumber[i] < '0' || phoneNumber[i] > '9')
+            return uwuFalse;
+
+    // check if it follows the malaysia format
+    index k = 0;
+    if (phoneNumber[0] == '6') // check if the phone number starts with '6'
+        k++; // if so, offset + 1 when checking
+
+    // check for all the possible starting format
+    for (index i = 0; i < PHONE_FORMAT_NUMBER && !(isPhone); i++){
+        isPhone = uwuTrue;
+        for (index j = 0; j < sizeOfString(PHONE_FORMAT_START[i]); j++){
+            // check if the starting of phone number match the format start
+            if (phoneNumber[j+k] != PHONE_FORMAT_START[i][j]){
+                isPhone = uwuFalse;
+            }
+        }
+        // check if the length is correct
+        if ((sizeOfString(phoneNumber) - k) != PHONE_FORMAT_LENGTH[i])
+            isPhone = uwuFalse;
+    }
+    return isPhone;
+}
+
+// check if the email is correct

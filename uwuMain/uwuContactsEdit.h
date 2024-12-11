@@ -13,6 +13,15 @@
 extern boolean hasEdited;
 
 /*---------------------------------------------------------------*/
+// for easier code understanding, create shortcut to determine first or last name
+typedef int typeOfName;
+
+enum EnumTypeOfName{
+    FIRST_NAME = 0,
+    LAST_NAME = 1
+};
+
+/*---------------------------------------------------------------*/
 // structure to store the entries
 static struct UwUContactsEditEntries{
     GObject *uwuEntryFirstName;
@@ -48,7 +57,7 @@ void returnUWUFalse(GtkButton *thisButton, GObject *uwuAlertWindow); // return t
 /*---------------------------------------------------------------*/
 // format verification
 // check if it is a valid name
-boolean isName(uwuName name);
+boolean isName(uwuName name, int firstOrLast);
 
 // check if it is a valid phone number
 boolean isPhoneNumber(uwuPhoneNumber phoneNumber);
