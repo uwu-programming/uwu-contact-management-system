@@ -167,6 +167,7 @@ static void startApp(GtkApplication *uwuApp, gpointer uwuData){
 
 /*---------------------------------------------------------------*/
 // button functions
+// log in
 static void loginFunction(GtkButton *uwuButton){
     string username, password;
     username = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryUsername), 0, -1);
@@ -175,5 +176,20 @@ static void loginFunction(GtkButton *uwuButton){
     // login and create the contact screen if username and password are right
     if (checkEligibleLogin(username, password) == uwuTrue){
         startContactsUI();
+    }
+}
+
+// sign up then log in
+static void signupFunction(GtkButton *uwuButton){
+    entryError error;
+    string username, password;
+    username = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryUsername), 0, -1);
+    password = gtk_editable_get_chars(GTK_EDITABLE(UwUEntries.uwuEntryPassword), 0, -1);
+
+    struct UwUUserNode *temp = uwuUserHeadNode;
+    for (index i = 0; i < UwUUserNodeCount; i++){
+        if (strcmp(username, temp->user->username) == 0)
+            error = DUPLICATE_ERROR;
+        temp = temp->next;
     }
 }

@@ -51,6 +51,16 @@
     background-color:#fdb3da;
 }
 
+.uwuCurrentUserLabel{
+    font-size: 25px;
+    font-family: monospace;
+    font-weight: bolder;
+    margin: 8px;
+}
+
+.uwuFrame{
+    margin: 5px;
+}
 /*---------------------------------------------------------------*/
 /* css for edit ui */
 .uwuEditTitleTop{

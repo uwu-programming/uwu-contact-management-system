@@ -35,16 +35,6 @@ static char *ALERT_MESSAGE[] = {
     "Are you sure you want to\ndelete this contact?"
 };
 
-// to determine which error
-typedef int entryError;
-
-enum EnumEntryError{
-    NO_ERROR = 0,
-    EMPTY_ERROR = 1,
-    DUPLICATE_ERROR = 2,
-    FORMAT_ERROR = 3
-};
-
 /*---------------------------------------------------------------*/
 // structure to store the entries
 static struct UwUContactsEditEntries{
