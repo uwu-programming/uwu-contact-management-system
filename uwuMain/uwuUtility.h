@@ -23,6 +23,16 @@ typedef char uwuMaxString[MAX_CHAR_LENGTH];
 typedef char uwuLabelString[50+20];
 typedef char filePath[256];
 
+// to determine which error
+typedef int entryError;
+
+enum EnumEntryError{
+    NO_ERROR = 0,
+    EMPTY_ERROR = 1,
+    DUPLICATE_ERROR = 2,
+    FORMAT_ERROR = 3
+};
+
 /*---------------------------------------------------------------*/
 // phone format condition
 #define PHONE_FORMAT_NUMBER 5

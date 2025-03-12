@@ -12,6 +12,7 @@
 
 #define READ "r" // macro for reading file
 #define WRITE "w" // macro for writing file
+#define APPEND "a" // macro for appending file
 
 // constant path to users.csv
 #define USERS_CSV "users.csv"

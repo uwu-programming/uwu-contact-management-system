@@ -28,8 +28,11 @@ int createGTKAPP(int argc, char *argv[]);
 static void startApp(GtkApplication *uwuApp, gpointer uwuData);
 
 /*---------------------------------------------------------------*/
-// function for log in button
+// function for log in button to log into a specific account
 static void loginFunction(GtkButton *uwuButton);
+
+// function for sign up button to create a new account
+static void signupFunction(GtkButton *uwuButton);
 
 /*---------------------------------------------------------------*/
 // uwuDebug

@@ -7,7 +7,7 @@
                 <!-- profile field -->
                 <child>
                     <object id = "uwuFieldProfile" class = "GtkBox">
-                        <child><object id = "uwuProfileLabel" class = "GtkLabel"></object></child>
+                        <child><object id = "uwuProfileLabel" class = "GtkLabel"><property name = "css-classes">uwuCurrentUserLabel</property></object></child>
                     </object>
                 </child>
                 <!-- search field -->
@@ -28,6 +28,7 @@
             <object id = "uwuFieldBottom" class = "GtkBox">
                 <child>
                     <object id = "uwuFrameFieldBottom" class = 'GtkFrame'>
+                        <property name = "css-classes">uwuFrame</property>
                         <child>
                             <object id = "uwuFrameScrollWindow" class = "GtkScrolledWindow">
                                 <child>
